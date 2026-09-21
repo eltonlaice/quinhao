@@ -20,13 +20,16 @@ From the EITI Mozambique report:
 Quinhão turns six years of those transfers into something a person in Nyamanhumbir or
 Benga can actually read, compare, and question.
 
+**Live page → https://eltonlaice.github.io/quinhao/**
+
 ## What this repository contains today
 
-A verified data pipeline. The application is not built yet.
+A verified data pipeline and a public page built from it.
 
 | File | Contents |
 |---|---|
 | `src/extract.py` | Downloads the source PDFs from eiti.org and parses them |
+| `src/build_site.py` | Builds `docs/index.html` — one 17 KB file, no external requests |
 | `data/transfers.csv` | 129 rows — allocation vs. realisation per locality, 2019/2021/2023/2024 |
 | `data/projects.csv` | 41 rows — individual funded projects with amounts, 2022 (**draft**, see caveats) |
 

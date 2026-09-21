@@ -18,13 +18,16 @@ ITIE Moçambique:
 O Quinhão transforma seis anos dessas transferências em algo que uma pessoa em
 Nyamanhumbir ou em Benga consegue ler, comparar e questionar.
 
+**Página pública → https://eltonlaice.github.io/quinhao/**
+
 ## O que este repositório contém hoje
 
-Uma pipeline de dados verificada. A aplicação ainda não está construída.
+Uma pipeline de dados verificada e uma página pública construída a partir dela.
 
 | Ficheiro | Conteúdo |
 |---|---|
 | `src/extract.py` | Descarrega os PDF de origem do eiti.org e analisa-os |
+| `src/build_site.py` | Gera `docs/index.html` — um ficheiro de 17 KB, sem pedidos externos |
 | `data/transfers.csv` | 129 linhas — dotação vs. realização por localidade, 2019/2021/2023/2024 |
 | `data/projects.csv` | 41 linhas — projectos financiados com valores, 2022 (**rascunho**, ver ressalvas) |
 

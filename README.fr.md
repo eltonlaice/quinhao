@@ -21,13 +21,16 @@ Extrait du rapport ITIE Mozambique :
 Quinhão transforme six années de ces transferts en quelque chose qu'une personne à
 Nyamanhumbir ou à Benga peut lire, comparer et contester.
 
+**Page publique → https://eltonlaice.github.io/quinhao/**
+
 ## Ce que contient ce dépôt aujourd'hui
 
-Un pipeline de données vérifié. L'application n'est pas encore construite.
+Un pipeline de données vérifié et une page publique construite à partir de celui-ci.
 
 | Fichier | Contenu |
 |---|---|
 | `src/extract.py` | Télécharge les PDF sources depuis eiti.org et les analyse |
+| `src/build_site.py` | Génère `docs/index.html` — un fichier de 17 Ko, sans requête externe |
 | `data/transfers.csv` | 129 lignes — dotation vs. réalisation par localité, 2019/2021/2023/2024 |
 | `data/projects.csv` | 41 lignes — projets financés et montants, 2022 (**brouillon**, voir réserves) |
 
