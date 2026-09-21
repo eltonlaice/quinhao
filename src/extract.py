@@ -22,6 +22,7 @@ RAW = ROOT / "data" / "raw"
 # EITI document ids -> local filename. Redirects to the real PDF.
 SOURCES = {
     "annex_6.1_communities_2023_2024": "https://eiti.org/document/26172",
+    "annex_6.2_provinces": "https://eiti.org/document/26173",
     "report_2022": "https://eiti.org/document/24717",
     "report_2021": "https://eiti.org/document/23064",
     "report_2020": "https://eiti.org/document/21672",
@@ -201,6 +202,32 @@ def parse_projects_2022(text):
     return rows
 
 
+# --- Annex 6.2: what the provincial directorates received, for comparison ----
+SUBTOTAL = re.compile(r"Sub\s*Total\s*(.*?)\s{2,}([\d.,]+)\s+([\d.,]+)\s*$")
+
+
+def parse_annex_62(text):
+    """Province subtotals only - the per-directorate detail is not needed downstream."""
+    rows, total, last = [], None, ""
+    for line in text.splitlines():
+        if "TOTAL GERAL" in line:
+            total = num(line.split()[-1])
+            continue
+        head = line[:12].strip()
+        if head and not any(c.isdigit() for c in head) and "Sub" not in head:
+            last = (last + " " + head).strip() if last and len(last) < 6 else head
+        m = SUBTOTAL.search(line)
+        if m:
+            raw = (m.group(1).strip() or last).strip()
+            # The Maputo subtotal has no label, so the fallback picks up stray column text.
+            name = next((p for p in PROVINCES if raw.startswith(p)), raw)
+            name = PROVINCE_CANON.get(name, name)
+            rows.append({"province": name, "allocated_mzn_m": num(m.group(2)),
+                         "realised_mzn_m": num(m.group(3))})
+            last = ""
+    return rows, total
+
+
 # Rows where the source merges the district cell vertically and centres text inside
 # each cell, so column position cannot tell a (district, locality) pair apart from a
 # (locality, activity) one. Corrected by hand against the source PDFs.
@@ -268,6 +295,9 @@ def main():
         texts["report_2020"], "Province & District", "Table 42 - Allocation of 2,75%", 2019)
     transfers = apply_corrections(transfers + rows_21 + rows_19)
     projects = parse_projects_2022(texts["report_2022"])
+    provinces, prov_total = parse_annex_62(texts["annex_6.2_provinces"])
+    assert abs(prov_total - 840.30) < 0.01, f"province total {prov_total} != 840.30"
+    assert abs(sum(r["allocated_mzn_m"] for r in provinces) - 840.30) < 0.05, "subtotals do not add up"
 
     found = {2023: totals.get(2023), 2024: totals.get(2024), 2021: total_21,
              2019: total_19, 2022: round(sum(r["amount_mzn"] for r in projects), 2)}
@@ -280,6 +310,8 @@ def main():
     transfers.sort(key=lambda r: (r["year"], r["province"] or "", r["locality"] or ""))
     write_csv(ROOT / "data" / "transfers.csv", TRANSFER_FIELDS, transfers)
     write_csv(ROOT / "data" / "projects.csv", PROJECT_FIELDS, projects)
+    write_csv(ROOT / "data" / "provinces.csv",
+              ["province", "allocated_mzn_m", "realised_mzn_m"], provinces)
 
 
 if __name__ == "__main__":

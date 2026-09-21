@@ -50,6 +50,17 @@ T = {
                        "que algo foi construído. E o próprio ITIE escreve que não é possível saber "
                        "que critério repartiu o valor por cada comunidade.",
         "note2022": "2022 não aparece acima: nesse ano o relatório oficial publica os gastos por projecto a nível nacional, sem repartição por localidade.",
+        "hero_kicker": "O que a lei promete às comunidades mineiras",
+        "hero_h": "318,7 milhões para as comunidades.<br>840,3 milhões para as direcções provinciais.",
+        "hero_p": "Em 2024, as comunidades que vivem em cima do rubi, do carvão e do gás receberam menos de um terço do que foi para as capitais provinciais. Ninguém explica porquê.",
+        "cmp_title": "Para onde foi o dinheiro da indústria extractiva em 2024",
+        "cmp_com": "Comunidades afectadas",
+        "cmp_prov": "Direcções provinciais",
+        "quote": "o REOE não permite aferir qual foi o critério utilizado para repartir o valor a alocar para cada comunidade e para quais actividades os fundos foram alocados",
+        "quote_src": "ITIE Moçambique, o organismo oficial de transparência, nos relatórios de 2020 e 2021",
+        "trend_title": "Total transferido às comunidades, por ano",
+        "trend_note": "Em 2022 o valor cai 39% e em 2024 quadruplica. Os relatórios não explicam nenhuma das duas variações.",
+        "find_title": "Encontra a tua localidade",
         "updated": "Dados de 2019 a 2024. Actualizado em",
     },
     "en": {
@@ -79,6 +90,17 @@ T = {
                        "anything was built. And EITI itself writes that the criterion used to split "
                        "the amount between communities cannot be determined.",
         "note2022": "2022 is missing above: that year the official report publishes spending by project at national level, with no split by locality.",
+        "hero_kicker": "What the law promises mining communities",
+        "hero_h": "318.7 million to the communities.<br>840.3 million to the provincial directorates.",
+        "hero_p": "In 2024 the communities living on top of the ruby, the coal and the gas received less than a third of what went to the provincial capitals. Nobody explains why.",
+        "cmp_title": "Where the extractive money went in 2024",
+        "cmp_com": "Affected communities",
+        "cmp_prov": "Provincial directorates",
+        "quote": "the budget execution report does not allow us to determine what criterion was used to split the amount allocated to each community, nor what activities the funds went to",
+        "quote_src": "EITI Mozambique, the official transparency body, in its 2020 and 2021 reports",
+        "trend_title": "Total transferred to communities, by year",
+        "trend_note": "In 2022 the figure falls 39%; in 2024 it quadruples. The reports explain neither move.",
+        "find_title": "Find your locality",
         "updated": "Data from 2019 to 2024. Updated",
     },
     "fr": {
@@ -108,6 +130,17 @@ T = {
                        "que quelque chose a été construit. Et l'ITIE écrit elle-même que le critère "
                        "de répartition entre communautés ne peut être déterminé.",
         "note2022": "2022 est absent ci-dessus : cette année-là, le rapport officiel publie les dépenses par projet au niveau national, sans répartition par localité.",
+        "hero_kicker": "Ce que la loi promet aux communautés minières",
+        "hero_h": "318,7 millions aux communautés.<br>840,3 millions aux directions provinciales.",
+        "hero_p": "En 2024, les communautés qui vivent sur le rubis, le charbon et le gaz ont reçu moins d'un tiers de ce qui est allé aux capitales provinciales. Personne n'explique pourquoi.",
+        "cmp_title": "Où est allé l'argent extractif en 2024",
+        "cmp_com": "Communautés affectées",
+        "cmp_prov": "Directions provinciales",
+        "quote": "le rapport d'exécution budgétaire ne permet pas de déterminer le critère utilisé pour répartir le montant alloué à chaque communauté, ni les activités financées",
+        "quote_src": "ITIE Mozambique, l'organisme officiel de transparence, rapports 2020 et 2021",
+        "trend_title": "Total transféré aux communautés, par année",
+        "trend_note": "En 2022 le montant chute de 39 % ; en 2024 il quadruple. Les rapports n'expliquent ni l'un ni l'autre.",
+        "find_title": "Trouvez votre localité",
         "updated": "Données de 2019 à 2024. Mis à jour le",
     },
 }
@@ -130,135 +163,243 @@ def load():
     return sorted(by_loc.values(), key=lambda e: (e["p"], e["d"], e["l"]))
 
 
-HTML = """<!DOCTYPE html>
+HTML = r"""<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quinhão — %(tagline_pt)s</title>
-<meta name="description" content="%(tagline_pt)s">
+<title>Quinhão — __TAGLINE__</title>
+<meta name="description" content="__TAGLINE__">
 <style>
-:root{--bg:#fffdf8;--fg:#1a1a1a;--mut:#5c5651;--line:#ded7cc;--acc:#8a5a00;--card:#fff}
-@media(prefers-color-scheme:dark){:root{--bg:#16150f;--fg:#f2efe8;--mut:#a9a299;--line:#332f28;--acc:#e0a53a;--card:#1f1d16}}
+:root{
+  color-scheme:light;
+  --bg:#fcfcfb; --surface:#fff; --fg:#0b0b0b; --fg2:#52514e; --mut:#77746d;
+  --line:#e3e0d9; --acc:#1c5cab; --s1:#2a78d6; --s2:#eb6834; --quote:#f4f1ea;
+}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme=light])){
+  color-scheme:dark;
+  --bg:#141413; --surface:#1a1a19; --fg:#fff; --fg2:#c3c2b7; --mut:#8e8b82;
+  --line:#2f2e2b; --acc:#86b6ef; --s1:#3987e5; --s2:#d95926; --quote:#201f1d;
+}}
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#141413; --surface:#1a1a19; --fg:#fff; --fg2:#c3c2b7; --mut:#8e8b82;
+  --line:#2f2e2b; --acc:#86b6ef; --s1:#3987e5; --s2:#d95926; --quote:#201f1d;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:46rem;margin:0 auto;padding:1.5rem 1rem 4rem}
-h1{font-size:2.1rem;margin:.2rem 0 .3rem;letter-spacing:-.02em}
-.tag{color:var(--acc);font-weight:600;margin:0 0 1rem}
-.intro{color:var(--mut);margin:0 0 1.5rem}
-nav{display:flex;gap:.4rem;margin-bottom:1.2rem;flex-wrap:wrap}
-nav button{font:inherit;font-size:.9rem;padding:.4rem .8rem;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;cursor:pointer}
-nav button[aria-pressed=true]{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:600}
-label{display:block;font-weight:600;margin:0 0 .4rem}
-input,select{font:inherit;width:100%%;padding:.7rem .8rem;border:2px solid var(--line);border-radius:.5rem;background:var(--card);color:var(--fg)}
-input:focus,select:focus{outline:3px solid var(--acc);outline-offset:1px}
-ul.hits{list-style:none;margin:.5rem 0 0;padding:0;max-height:15rem;overflow:auto;border:1px solid var(--line);border-radius:.5rem}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+ font-variant-numeric:tabular-nums}
+.wrap{max-width:52rem;margin:0 auto;padding:0 1rem 5rem}
+header{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+ padding:1rem 0;flex-wrap:wrap}
+.brand{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.brand span{color:var(--s2)}
+nav{display:flex;gap:.35rem}
+nav button{font:inherit;font-size:.82rem;padding:.3rem .7rem;border:1px solid var(--line);
+ background:var(--surface);color:var(--fg2);border-radius:999px;cursor:pointer}
+nav button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg);font-weight:600}
+.kicker{color:var(--s2);font-weight:700;font-size:.8rem;letter-spacing:.09em;
+ text-transform:uppercase;margin:2rem 0 .75rem}
+h1{font-size:clamp(1.9rem,6vw,3.1rem);line-height:1.12;letter-spacing:-.03em;
+ margin:0 0 1rem;font-weight:800;text-wrap:balance}
+.lede{font-size:clamp(1rem,2.6vw,1.2rem);color:var(--fg2);margin:0 0 2rem;max-width:40rem}
+section{margin:3rem 0 0;padding-top:2rem;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0;padding-top:0}
+h2{font-size:1.25rem;letter-spacing:-.01em;margin:0 0 .3rem;font-weight:700}
+.sub{color:var(--mut);font-size:.9rem;margin:0 0 1.2rem}
+figure{margin:1.2rem 0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.lbl{fill:var(--fg2);font-size:13px}
+.val{fill:var(--fg);font-size:14px;font-weight:700}
+.axis{stroke:var(--line);stroke-width:1}
+blockquote{margin:1.5rem 0 0;padding:1.3rem 1.4rem;background:var(--quote);
+ border-left:4px solid var(--s2);border-radius:0 .5rem .5rem 0}
+blockquote p{margin:0;font-size:1.06rem;line-height:1.5;font-style:italic}
+blockquote cite{display:block;margin-top:.8rem;font-size:.85rem;color:var(--mut);font-style:normal}
+label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+input{font:inherit;width:100%;padding:.8rem .9rem;border:2px solid var(--line);
+ border-radius:.6rem;background:var(--surface);color:var(--fg)}
+input:focus{outline:3px solid var(--acc);outline-offset:1px;border-color:transparent}
+ul.hits{list-style:none;margin:.5rem 0 0;padding:0;max-height:17rem;overflow:auto;
+ border:1px solid var(--line);border-radius:.6rem}
 ul.hits:empty{display:none}
-ul.hits button{display:block;width:100%%;text-align:left;font:inherit;padding:.65rem .8rem;background:var(--card);color:var(--fg);border:0;border-bottom:1px solid var(--line);cursor:pointer}
+ul.hits button{display:block;width:100%;text-align:left;font:inherit;padding:.7rem .9rem;
+ background:var(--surface);color:var(--fg);border:0;border-bottom:1px solid var(--line);cursor:pointer}
 ul.hits button:hover,ul.hits button:focus{background:var(--acc);color:var(--bg)}
-ul.hits small{display:block;opacity:.75}
-section{margin-top:2rem;border-top:1px solid var(--line);padding-top:1.3rem}
-h2{font-size:1.15rem;margin:0 0 .6rem}
-table{width:100%%;border-collapse:collapse;margin:.5rem 0}
-th,td{text-align:left;padding:.5rem .3rem;border-bottom:1px solid var(--line)}
-td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-tr.tot td{font-weight:700;border-bottom:0;border-top:2px solid var(--fg)}
-.big{font-size:1.9rem;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums}
-.mut{color:var(--mut)}
-ol,ul.plain{padding-left:1.2rem;margin:.5rem 0}
-li{margin:.3rem 0}
-footer{margin-top:2.5rem;font-size:.85rem;color:var(--mut)}
+ul.hits small{display:block;opacity:.75;font-size:.82rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:.8rem;
+ padding:1.3rem;margin-top:1.3rem}
+.hero-n{font-size:clamp(2.2rem,8vw,3rem);font-weight:800;color:var(--s2);line-height:1;letter-spacing:-.03em}
+.unit{font-size:.95rem;color:var(--mut);font-weight:500}
+table{width:100%;border-collapse:collapse;margin:.6rem 0}
+th,td{text-align:left;padding:.5rem .3rem;border-bottom:1px solid var(--line);font-size:.95rem}
+td.n{text-align:right;white-space:nowrap}
+ol,ul.plain{padding-left:1.25rem;margin:.6rem 0}
+li{margin:.35rem 0}
+.note{color:var(--mut);font-size:.88rem}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
+ font-size:.85rem;color:var(--mut)}
 a{color:var(--acc)}
 [hidden]{display:none!important}
+@media print{nav{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav id="langs"></nav>
-<h1>Quinhão</h1>
-<p class="tag" id="tagline"></p>
-<p class="intro" id="intro"></p>
+<header>
+  <div class="brand">Quinh<span>ã</span>o</div>
+  <nav id="langs" aria-label="Language"></nav>
+</header>
 
-<label for="q" id="picklbl"></label>
-<input id="q" type="search" autocomplete="off" enterkeyhint="search">
-<ul class="hits" id="hits"></ul>
-<p id="nomatch" class="mut" hidden></p>
+<p class="kicker" id="kicker"></p>
+<h1 id="heroh"></h1>
+<p class="lede" id="herop"></p>
 
-<div id="result" hidden>
-  <section>
-    <h2 id="r-title"></h2>
-    <p class="mut" id="r-where"></p>
-    <table>
-      <thead><tr><th id="h-year"></th><th class="n" id="h-amt"></th></tr></thead>
-      <tbody id="r-rows"></tbody>
-    </table>
-    <p class="mut" id="r-note2022" style="font-size:.9rem"></p>
-    <p><span class="big" id="r-total"></span> <span class="mut" id="r-unit"></span><br>
-    <span class="mut" id="r-totlbl"></span></p>
-  </section>
-  <section>
-    <h2 id="n-title"></h2>
-    <p id="n-body"></p>
-    <ul class="plain" id="n-uses"></ul>
-  </section>
-  <section>
-    <h2 id="a-title"></h2>
-    <ol id="a-list"></ol>
-  </section>
-</div>
+<section>
+  <h2 id="cmp-t"></h2>
+  <p class="sub" id="cmp-s"></p>
+  <figure><svg id="cmp" viewBox="0 0 640 150" role="img" aria-labelledby="cmp-t"></svg></figure>
+  <blockquote>
+    <p id="quote"></p>
+    <cite id="quote-src"></cite>
+  </blockquote>
+</section>
+
+<section>
+  <h2 id="trend-t"></h2>
+  <p class="sub" id="trend-s"></p>
+  <figure><svg id="trend" viewBox="0 0 640 220" role="img" aria-labelledby="trend-t"></svg></figure>
+  <p class="note" id="trend-note"></p>
+</section>
+
+<section>
+  <h2 id="find-t"></h2>
+  <label for="q" id="picklbl"></label>
+  <input id="q" type="search" autocomplete="off" enterkeyhint="search">
+  <ul class="hits" id="hits"></ul>
+  <p id="nomatch" class="note" hidden></p>
+
+  <div id="result" hidden>
+    <div class="card">
+      <h2 id="r-title"></h2>
+      <p class="sub" id="r-where"></p>
+      <figure><svg id="r-chart" viewBox="0 0 640 170" role="img"></svg></figure>
+      <p><span class="hero-n" id="r-total"></span> <span class="unit" id="r-unit"></span><br>
+      <span class="note" id="r-totlbl"></span></p>
+      <p class="note" id="r-note2022"></p>
+      <table>
+        <thead><tr><th id="h-year"></th><th class="n" id="h-amt"></th></tr></thead>
+        <tbody id="r-rows"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2 id="n-title"></h2>
+      <p id="n-body"></p>
+      <ul class="plain" id="n-uses"></ul>
+      <h2 id="a-title" style="margin-top:1.2rem"></h2>
+      <ol id="a-list"></ol>
+    </div>
+  </div>
+</section>
 
 <section>
   <h2 id="s-title"></h2>
-  <p class="mut" id="s-body"></p>
-  <h2 id="c-title" style="margin-top:1.2rem"></h2>
-  <p class="mut" id="c-body"></p>
+  <p class="note" id="s-body"></p>
+  <h2 id="c-title" style="margin-top:1.3rem"></h2>
+  <p class="note" id="c-body"></p>
 </section>
 
-<footer><span id="f-upd"></span> %(built)s ·
+<footer><span id="f-upd"></span> __BUILT__ ·
 <a href="https://github.com/eltonlaice/quinhao">github.com/eltonlaice/quinhao</a> ·
 <a href="https://eiti.org/countries/mozambique">eiti.org</a></footer>
 </div>
+
 <script>
-const DATA=%(data)s, T=%(t)s, USES=%(uses)s, YEARS=%(years)s;
+const DATA=__DATA__, T=__T__, USES=__USES__, YEARS=__YEARS__,
+      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__;
 let lang=(navigator.language||"pt").slice(0,2); if(!T[lang]) lang="pt";
 let picked=null;
 const $=id=>document.getElementById(id);
-const fmt=n=>n.toLocaleString(lang==="en"?"en-GB":lang==="fr"?"fr-FR":"pt-PT",{minimumFractionDigits:1,maximumFractionDigits:1});
+const loc=()=>lang==="en"?"en-GB":lang==="fr"?"fr-FR":"pt-PT";
+const fmt=n=>n.toLocaleString(loc(),{minimumFractionDigits:1,maximumFractionDigits:1});
+const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+/* Horizontal bars: two categories, direct-labelled, 4px rounded data-end. */
+function hbars(svg,items){
+  const W=640,rowH=54,pad=170,max=Math.max(...items.map(i=>i.v));
+  svg.setAttribute("viewBox",`0 0 ${W} ${items.length*rowH+16}`);
+  svg.innerHTML=items.map((it,i)=>{
+    const y=i*rowH+8, w=Math.max(3,(W-pad-90)*it.v/max);
+    return `<g><title>${esc(it.k)}: ${fmt(it.v)}</title>`+
+      `<text class="lbl" x="0" y="${y+26}">${esc(it.k)}</text>`+
+      `<rect x="${pad}" y="${y+8}" width="${w}" height="28" rx="4" fill="${it.c}"/>`+
+      `<text class="val" x="${pad+w+10}" y="${y+28}">${fmt(it.v)}</text></g>`;
+  }).join("");
+}
+
+/* Vertical bars over time: one series, one hue, every bar labelled. */
+function vbars(svg,items,color){
+  const W=640,H=220,base=H-34,top=26,max=Math.max(...items.map(i=>i.v)),
+        n=items.length,gap=10,bw=(W-(n-1)*gap)/n;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  svg.innerHTML=`<line class="axis" x1="0" y1="${base}" x2="${W}" y2="${base}"/>`+
+    items.map((it,i)=>{
+      const h=Math.max(3,(base-top)*it.v/max), x=i*(bw+gap), y=base-h;
+      return `<g><title>${esc(it.k)}: ${fmt(it.v)}</title>`+
+        `<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="4" fill="${color}"/>`+
+        `<text class="val" x="${x+bw/2}" y="${y-8}" text-anchor="middle">${fmt(it.v)}</text>`+
+        `<text class="lbl" x="${x+bw/2}" y="${base+20}" text-anchor="middle">${esc(it.k)}</text></g>`;
+    }).join("");
+}
 
 $("langs").innerHTML=Object.keys(T).map(k=>
-  `<button data-l="${k}">${T[k].lang_name}</button>`).join("");
+  `<button data-l="${k}" type="button">${T[k].lang_name}</button>`).join("");
 $("langs").onclick=e=>{const l=e.target.dataset.l; if(l){lang=l; render();}};
+
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
 
 function render(){
   const t=T[lang];
   document.documentElement.lang=lang;
-  for(const [id,v] of Object.entries({tagline:t.tagline,intro:t.intro,picklbl:t.pick,
-    nomatch:t.nomatch,"h-year":t.year,"h-amt":t.amount,"r-totlbl":t.total,"r-unit":t.mzn_m,
-    "n-title":t.next_title,"a-title":t.ask_title,"s-title":t.source_title,"s-body":t.source_body,
-    "c-title":t.caveat_title,"c-body":t.caveat_body,"f-upd":t.updated,
-    "r-note2022":t.note2022})) $(id).textContent=v;
+  const text={kicker:t.hero_kicker,herop:t.hero_p,"cmp-t":t.cmp_title,
+    quote:"“"+t.quote+"”","quote-src":t.quote_src,"trend-t":t.trend_title,
+    "trend-note":t.trend_note,"find-t":t.find_title,picklbl:t.pick,nomatch:t.nomatch,
+    "h-year":t.year,"h-amt":t.amount,"r-totlbl":t.total,"r-unit":t.mzn_m,
+    "n-title":t.next_title,"a-title":t.ask_title,"s-title":t.source_title,
+    "s-body":t.source_body,"c-title":t.caveat_title,"c-body":t.caveat_body,
+    "r-note2022":t.note2022,"f-upd":t.updated,"cmp-s":t.mzn_m,"trend-s":t.mzn_m};
+  for(const [id,v] of Object.entries(text)) $(id).textContent=v;
+  $("heroh").innerHTML=t.hero_h;
   $("n-body").innerHTML=t.next_body;
   $("q").placeholder=t.search;
-  $("n-uses").innerHTML=USES[lang].map(u=>`<li>${u}</li>`).join("");
-  $("a-list").innerHTML=t.asks.map(a=>`<li>${a}</li>`).join("");
+  $("n-uses").innerHTML=USES[lang].map(u=>`<li>${esc(u)}</li>`).join("");
+  $("a-list").innerHTML=t.asks.map(a=>`<li>${esc(a)}</li>`).join("");
   [...$("langs").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
+
+  hbars($("cmp"),[{k:t.cmp_com,v:NATIONAL["2024"],c:css("--s1")},
+                  {k:t.cmp_prov,v:PROVINCES,c:css("--s2")}]);
+  vbars($("trend"),Object.entries(NATIONAL).map(([k,v])=>({k,v})),css("--s1"));
   search(); if(picked) show(picked);
 }
 
 function search(){
-  const t=T[lang], q=$("q").value.trim().toLowerCase();
+  const q=$("q").value.trim().toLowerCase();
   if(!q){$("hits").innerHTML="";$("nomatch").hidden=true;return;}
   const hits=DATA.filter(e=>(e.l+" "+e.d+" "+e.p).toLowerCase().includes(q)).slice(0,30);
   $("nomatch").hidden=hits.length>0;
   $("hits").innerHTML=hits.map(e=>
-    `<li><button data-k="${e.l}|${e.d}">${e.l}<small>${e.d}, ${e.p}</small></button></li>`).join("");
+    `<li><button type="button" data-k="${esc(e.l)}|${esc(e.d)}">${esc(e.l)}`+
+    `<small>${esc(e.d)}, ${esc(e.p)}</small></button></li>`).join("");
 }
 $("q").oninput=search;
 $("hits").onclick=e=>{
   const b=e.target.closest("button"); if(!b) return;
   const [l,d]=b.dataset.k.split("|");
   picked=DATA.find(x=>x.l===l&&x.d===d);
-  $("q").value=""; search(); show(picked); $("result").scrollIntoView({behavior:"smooth"});
+  $("q").value=""; search(); show(picked);
+  $("result").scrollIntoView({behavior:"smooth",block:"start"});
 };
 
 function show(e){
@@ -266,13 +407,14 @@ function show(e){
   $("result").hidden=false;
   $("r-title").textContent=`${t.received}: ${e.l}`;
   $("r-where").textContent=[e.d,e.p,e.m].filter(Boolean).join(" · ");
-  let tot=0;
+  const got=YEARS.filter(y=>e.y[String(y)]!=null).map(y=>({k:String(y),v:e.y[String(y)]}));
+  vbars($("r-chart"),got.length?got:[{k:"—",v:0}],css("--s1"));
+  $("r-total").textContent=fmt(got.reduce((a,b)=>a+b.v,0));
   $("r-rows").innerHTML=YEARS.map(y=>{
     const v=e.y[String(y)];
-    if(v!=null) tot+=v;
-    return `<tr><td>${y}</td><td class="n">${v!=null?fmt(v)+" "+t.mzn_m:'<span class="mut">'+t.no_data+'</span>'}</td></tr>`;
+    return `<tr><td>${y}</td><td class="n">${v!=null?fmt(v)+" "+t.mzn_m:
+      '<span class="note">'+t.no_data+'</span>'}</td></tr>`;
   }).join("");
-  $("r-total").textContent=fmt(tot);
 }
 render();
 </script>
@@ -280,22 +422,31 @@ render();
 </html>
 """
 
+NATIONAL = {2019: 88.0, 2021: 73.4, 2022: 44.6, 2023: 77.1, 2024: 318.7}
+
 
 def main():
     import datetime
     data = load()
+    with (ROOT / "data" / "provinces.csv").open(encoding="utf-8") as fh:
+        provinces = round(sum(float(r["allocated_mzn_m"]) for r in csv.DictReader(fh)), 1)
     out = ROOT / "docs" / "index.html"
     out.parent.mkdir(exist_ok=True)
-    out.write_text(HTML % {
-        "data": json.dumps(data, ensure_ascii=False, separators=(",", ":")),
-        "t": json.dumps(T, ensure_ascii=False, separators=(",", ":")),
-        "uses": json.dumps(USES, ensure_ascii=False, separators=(",", ":")),
-        "years": json.dumps(YEARS),
-        "tagline_pt": T["pt"]["tagline"],
-        "built": datetime.date.today().isoformat(),
-    }, encoding="utf-8")
+    html = HTML
+    for k, v in {
+        "__DATA__": json.dumps(data, ensure_ascii=False, separators=(",", ":")),
+        "__T__": json.dumps(T, ensure_ascii=False, separators=(",", ":")),
+        "__USES__": json.dumps(USES, ensure_ascii=False, separators=(",", ":")),
+        "__YEARS__": json.dumps(YEARS),
+        "__NATIONAL__": json.dumps({str(y): v for y, v in NATIONAL.items()}),
+        "__PROVINCES__": json.dumps(provinces),
+        "__TAGLINE__": T["pt"]["tagline"],
+        "__BUILT__": datetime.date.today().isoformat(),
+    }.items():
+        html = html.replace(k, v)
+    out.write_text(html, encoding="utf-8")
     kb = out.stat().st_size / 1024
-    assert kb < 150, f"page grew to {kb:.0f} KB - it must stay small for slow connections"
+    assert kb < 90, f"page grew to {kb:.0f} KB - it must stay small for slow connections"
     print(f"wrote {out.relative_to(ROOT)} ({kb:.0f} KB, {len(data)} localities)")
 
 
