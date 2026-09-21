@@ -2,26 +2,26 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2019,Cabo Delgado,Montepuez,Nyamanhumbir,,20.9,20.8
 2019,Inhambane,Inhassoro,Maimelane,,2.7,2.7
 2019,Inhambane,Govuro,Pande,,2.7,2.7
-2019,Manica,,Penhalonga,,0.6,0.6
+2019,Manica,Manica,Penhalonga,,0.6,0.6
 2019,Nampula,Moma,Topuito,,4.9,4.9
-2019,Tete,,25 de Setembro,,14.6,14.6
+2019,Tete,Moatize,25 de Setembro,,14.6,14.6
 2019,Tete,Moatize,Benga,,7.1,7.1
-2019,Tete,,Cateme,,14.6,14.6
+2019,Tete,Moatize,Cateme,,14.6,14.6
 2019,Tete,Moatize,Chipanga II,,14.6,14.6
 2019,Tete,Marara,Marara,,3.5,3.2
-2019,ZambEzia,Chinde,Mitange,,1.4,1.4
-2021,Cabo Delgado,Montepuez,Balama,,2.3,2.3
-2021,Cabo Delgado,,Nyamanhumbir,,10.5,10.5
+2019,Zambézia,Chinde,Mitange,,1.4,1.4
+2021,Cabo Delgado,Balama,Balama,,2.3,2.3
+2021,Cabo Delgado,Montepuez,Nyamanhumbir,,10.5,10.5
 2021,Inhambane,Inhassoro,Maimelane,,8.4,8.4
 2021,Inhambane,Govuro,Pande,,8.4,8.4
-2021,Manica,,Machipanda,,1.2,1.2
-2021,Manica,,Penhalonga,,0.0,0.0
+2021,Manica,Manica,Machipanda,,1.2,1.2
+2021,Manica,Manica,Penhalonga,,0.0,0.0
 2021,Maputo,Boane,Boane,,0.2,0.2
 2021,Nampula,Angoche,Angoche,,0.3,0.3
 2021,Nampula,Larde,Topuito,,4.8,4.8
-2021,Tete,,25 de Setembro,,9.9,9.9
+2021,Tete,Moatize,25 de Setembro,,9.9,9.9
 2021,Tete,Moatize,Benga,,6.9,6.9
-2021,Tete,,Cateme,,9.9,9.9
+2021,Tete,Moatize,Cateme,,9.9,9.9
 2021,Tete,Moatize,Chipanga II,,9.9,9.9
 2021,Tete,Marara,Marara,,0.0,0.0
 2021,Zambézia,Chinde,Mitange,,0.5,0.5
@@ -29,10 +29,10 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2023,Cabo Delgado,Balama,Balama,"Grafite, vanadio",0.6,0.6
 2023,Cabo Delgado,Chiúre,Chiúre,,0.0,0.0
 2023,Cabo Delgado,Chiúre,Chiúre-Velho,,0.0,0.0
-2023,Cabo Delgado,Mocimboa da Praia,"Gás/ LNG, Condesado",,0.0,0.0
 2023,Cabo Delgado,Meluco,Meluco,,0.0,0.0
 2023,Cabo Delgado,Ancuabe,Mesa,Rubis,0.0,0.0
 2023,Cabo Delgado,Ancuabe,Metoro,"Grafite, Ouro",0.2,0.2
+2023,Cabo Delgado,Mocimboa da Praia,Mocimboa da Praia,"Gás/ LNG, Condesado",0.0,0.0
 2023,Cabo Delgado,Montepuez,Montepuez,,1.2,1.2
 2023,Cabo Delgado,Mecufi,Murrébué,,0.1,0.1
 2023,Cabo Delgado,Namuno,Namuno,,0.0,0.0
@@ -44,8 +44,8 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2023,Inhambane,Inhassoro,Inhassoro,"Saibro, Calcário, Guano",0.0,0.0
 2023,Inhambane,Inhassoro,Maimelane,,6.0,6.0
 2023,Inhambane,Govuro,Pande,Gás condesado,7.3,7.3
+2023,Manica,Manica,Machipada,"Ouro, Bauxite e Água Min",0.7,0.7
 2023,Manica,Sussundenga,Moucha,Granito,0.0,0.0
-2023,Manica,Machipada,"Ouro, Bauxite e Água Min",,0.7,0.7
 2023,Maputo,Namaacha,Namaacha,Água Mineral,0.4,0.4
 2023,Maputo,Moamba,Pessene,Pedra (Riolito),0.0,0.0
 2023,Maputo,Moamba,Sábié,Riolito,0.1,0.1
@@ -62,28 +62,28 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2023,Sofala,Buzi,Estaquinha,Calcário,0.0,0.0
 2023,Sofala,Dondo,Mafambisse,,0.1,0.1
 2023,Sofala,Nhamatanda,Nhamatanda,Saibro,0.0,0.0
-2023,Tete,25 de Setembro,Carvão Mineral,,1.9,1.9
-2023,Tete,Chipanga II,Carvão Mineral,,1.9,1.9
-2023,Tete,Benga,Carvão Mineral,,15.3,15.3
+2023,Tete,Moatize,25 de Setembro,Carvão Mineral,1.9,1.9
+2023,Tete,Moatize,Benga,Carvão Mineral,15.3,15.3
 2023,Tete,Moatize,Cateme,Carvão Mineral,1.9,1.9
 2023,Tete,Chiúta,Caunda,Água Mineral,0.0,0.0
+2023,Tete,Moatize,Chipanga II,Carvão Mineral,1.9,1.9
 2023,Tete,Cahora Bassa,Chitima,"Carvão Mineral, Brita",0.0,0.0
 2023,Tete,Angónia,Dómue,Ouro,0.0,0.0
 2023,Tete,Marara,Kachembe,Carvão Mineral,2.8,2.8
-2023,Zambezia,Gilé,Gilé,Ouro,0.0,0.0
-2023,Zambezia,Gurué,Gurué,,0.3,0.3
-2023,Zambezia,Micaune,"Ilmenite, Zircão",,0.8,0.8
-2023,Zambezia,Chinde,Mitange,"Ilmenite, Titânio, Zircão",3.0,3.0
-2023,Zambezia,Morrumbala,Morrumbala,Granito,0.1,0.1
-2023,Zambezia,Pebane,Pebane,Areias pesadas,2.0,2.0
-2023,Zambezia,Alto Moloucue,"Tantalite, Lepidolite",,0.0,0.0
+2023,Zambézia,Alto Moloucue,Alto Moloucue,"Tantalite, Lepidolite",0.0,0.0
+2023,Zambézia,Gilé,Gilé,Ouro,0.0,0.0
+2023,Zambézia,Gurué,Gurué,,0.3,0.3
+2023,Zambézia,Chinde,Micaune,"Ilmenite, Zircão",0.8,0.8
+2023,Zambézia,Chinde,Mitange,"Ilmenite, Titânio, Zircão",3.0,3.0
+2023,Zambézia,Morrumbala,Morrumbala,Granito,0.1,0.1
+2023,Zambézia,Pebane,Pebane,Areias pesadas,2.0,2.0
 2024,Cabo Delgado,Balama,Balama,"Grafite, vanadio",4.1,4.1
 2024,Cabo Delgado,Chiúre,Chiúre,,0.1,0.1
 2024,Cabo Delgado,Chiúre,Chiúre-Velho,,0.1,0.1
-2024,Cabo Delgado,Mocimboa da Praia,"Gás/ LNG, Condesado",,3.8,3.8
 2024,Cabo Delgado,Meluco,Meluco,,0.2,0.2
 2024,Cabo Delgado,Ancuabe,Mesa,Rubis,22.6,22.6
 2024,Cabo Delgado,Ancuabe,Metoro,"Grafite, Ouro",0.2,0.2
+2024,Cabo Delgado,Mocimboa da Praia,Mocimboa da Praia,"Gás/ LNG, Condesado",3.8,3.8
 2024,Cabo Delgado,Montepuez,Montepuez,,0.0,0.0
 2024,Cabo Delgado,Mecufi,Murrébué,,0.0,0.0
 2024,Cabo Delgado,Namuno,Namuno,,0.2,0.2
@@ -95,8 +95,8 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2024,Inhambane,Inhassoro,Inhassoro,"Saibro, Calcário, Guano",0.1,0.1
 2024,Inhambane,Inhassoro,Maimelane,,11.8,11.8
 2024,Inhambane,Govuro,Pande,Gás condesado,14.4,14.4
+2024,Manica,Manica,Machipada,"Ouro, Bauxite e Água Min",3.3,3.3
 2024,Manica,Sussundenga,Moucha,Granito,0.1,0.1
-2024,Manica,Machipada,"Ouro, Bauxite e Água Min",,3.3,3.3
 2024,Maputo,Namaacha,Namaacha,Água Mineral,0.2,0.2
 2024,Maputo,Moamba,Pessene,Pedra (Riolito),1.3,1.3
 2024,Maputo,Moamba,Sábié,Riolito,0.0,0.0
@@ -113,18 +113,18 @@ year,province,district,locality,mining_activity,allocated_mzn_m,realised_mzn_m
 2024,Sofala,Buzi,Estaquinha,Calcário,0.1,0.1
 2024,Sofala,Dondo,Mafambisse,,0.0,0.0
 2024,Sofala,Nhamatanda,Nhamatanda,Saibro,0.1,0.1
-2024,Tete,25 de Setembro,Carvão Mineral,,25.1,25.1
-2024,Tete,Chipanga II,Carvão Mineral,,25.1,25.1
-2024,Tete,Benga,Carvão Mineral,,11.4,11.4
+2024,Tete,Moatize,25 de Setembro,Carvão Mineral,25.1,25.1
+2024,Tete,Moatize,Benga,Carvão Mineral,11.4,11.4
 2024,Tete,Moatize,Cateme,Carvão Mineral,25.1,25.1
 2024,Tete,Chiúta,Caunda,Água Mineral,0.1,0.1
+2024,Tete,Moatize,Chipanga II,Carvão Mineral,25.1,25.1
 2024,Tete,Cahora Bassa,Chitima,"Carvão Mineral, Brita",9.4,9.4
 2024,Tete,Angónia,Dómue,Ouro,1.2,1.2
 2024,Tete,Marara,Kachembe,Carvão Mineral,0.6,0.6
-2024,Zambezia,Gilé,Gilé,Ouro,0.1,0.1
-2024,Zambezia,Gurué,Gurué,,0.0,0.0
-2024,Zambezia,Micaune,"Ilmenite, Zircão",,32.8,32.8
-2024,Zambezia,Chinde,Mitange,"Ilmenite, Titânio, Zircão",13.2,13.2
-2024,Zambezia,Morrumbala,Morrumbala,Granito,10.6,10.6
-2024,Zambezia,Pebane,Pebane,Areias pesadas,7.9,7.9
-2024,Zambezia,Alto Moloucue,"Tantalite, Lepidolite",,0.3,0.3
+2024,Zambézia,Alto Moloucue,Alto Moloucue,"Tantalite, Lepidolite",0.3,0.3
+2024,Zambézia,Gilé,Gilé,Ouro,0.1,0.1
+2024,Zambézia,Gurué,Gurué,,0.0,0.0
+2024,Zambézia,Chinde,Micaune,"Ilmenite, Zircão",32.8,32.8
+2024,Zambézia,Chinde,Mitange,"Ilmenite, Titânio, Zircão",13.2,13.2
+2024,Zambézia,Morrumbala,Morrumbala,Granito,10.6,10.6
+2024,Zambézia,Pebane,Pebane,Areias pesadas,7.9,7.9

@@ -201,6 +201,43 @@ def parse_projects_2022(text):
     return rows
 
 
+# Rows where the source merges the district cell vertically and centres text inside
+# each cell, so column position cannot tell a (district, locality) pair apart from a
+# (locality, activity) one. Corrected by hand against the source PDFs.
+# Keyed by what the parser produced: (province, district, locality).
+CORRECTIONS = {
+    ("Tete", "25 de Setembro", "Carvão Mineral"): ("Moatize", "25 de Setembro", "Carvão Mineral"),
+    ("Tete", "Chipanga II", "Carvão Mineral"): ("Moatize", "Chipanga II", "Carvão Mineral"),
+    ("Tete", "Benga", "Carvão Mineral"): ("Moatize", "Benga", "Carvão Mineral"),
+    ("Zambézia", "Micaune", "Ilmenite, Zircão"): ("Chinde", "Micaune", "Ilmenite, Zircão"),
+    ("Manica", "Machipada", "Ouro, Bauxite e Água Min"): ("Manica", "Machipada", "Ouro, Bauxite e Água Min"),
+    ("Cabo Delgado", None, "Nyamanhumbir"): ("Montepuez", "Nyamanhumbir", ""),
+    ("Tete", None, "25 de Setembro"): ("Moatize", "25 de Setembro", ""),
+    ("Tete", None, "Cateme"): ("Moatize", "Cateme", ""),
+    ("Manica", None, "Penhalonga"): ("Manica", "Penhalonga", ""),
+    ("Manica", None, "Machipanda"): ("Manica", "Machipanda", ""),
+    # District name wrapped onto its own line, shifting locality into the activity column.
+    ("Cabo Delgado", "Mocimboa da Praia", "Gás/ LNG, Condesado"):
+        ("Mocimboa da Praia", "Mocimboa da Praia", "Gás/ LNG, Condesado"),
+    ("Zambézia", "Alto Moloucue", "Tantalite, Lepidolite"):
+        ("Alto Moloucue", "Alto Moloucue", "Tantalite, Lepidolite"),
+    # 2021 lists Balama under Montepuez; it is its own district in every other year.
+    ("Cabo Delgado", "Montepuez", "Balama"): ("Balama", "Balama", ""),
+}
+
+# The source spells provinces inconsistently across years.
+PROVINCE_CANON = {"ZambEzia": "Zambézia", "Zambezia": "Zambézia", "Inhanbane": "Inhambane"}
+
+
+def apply_corrections(rows):
+    for r in rows:
+        r["province"] = PROVINCE_CANON.get(r["province"], r["province"])
+        fix = CORRECTIONS.get((r["province"], r["district"] or None, r["locality"]))
+        if fix:
+            r["district"], r["locality"], r["mining_activity"] = fix
+    return rows
+
+
 # --- assembly -------------------------------------------------------------
 # Published totals, in millions of MZN except 2022 which is in full meticais.
 # These are the self-check: if a parser drifts, the run fails loudly.
@@ -229,7 +266,7 @@ def main():
         texts["report_2021"], "Província & Distrito", "Tabela 46 - Alocação dos 2,75%", 2021)
     rows_19, total_19 = parse_inline_table(
         texts["report_2020"], "Province & District", "Table 42 - Allocation of 2,75%", 2019)
-    transfers += rows_21 + rows_19
+    transfers = apply_corrections(transfers + rows_21 + rows_19)
     projects = parse_projects_2022(texts["report_2022"])
 
     found = {2023: totals.get(2023), 2024: totals.get(2024), 2021: total_21,
