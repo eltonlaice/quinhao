@@ -1,0 +1,86 @@
+QUINHAO - DEMO VIDEO SCRIPT (English)
+Target: ~95 seconds. Read at a calm pace. Say the numbers slowly.
+Stage directions are in [brackets] - do not read them aloud.
+
+
+[SCREEN: top of the page, before scrolling]
+
+Hi, I'm Elton Laice, from Mozambique. This is Quinhao - my entry for the
+Transparency and Accountability track.
+
+Quinhao is a Portuguese word. It means the share that is owed to someone by
+right.
+
+Mozambican law sends two point seven five percent of the mining and gas
+production tax to the communities where the extraction happens. This tool shows
+where that money actually went - and what nobody can explain.
+
+
+[SCREEN: scroll to the comparison chart]
+
+In 2024, those communities received three hundred and eighteen million meticais.
+The provincial offices received eight hundred and forty.
+
+
+[SCREEN: the EITI quote]
+
+And this is not my accusation. This is EITI Mozambique, the government's own
+transparency body, saying it cannot determine what criterion split that money
+between communities.
+
+
+[SCREEN: click "Dollars"]
+
+In dollars, that's five million for every mining community in the country.
+
+
+[SCREEN: map - switch to "Districts" - click Moatize]
+
+It's also concentrated. Tete gets ninety-eight million. Eighty-seven of it lands
+in one district - Moatize.
+
+
+[SCREEN: search for "Benga" and select it]
+
+And here is who it's for. Benga, a coal community in Moatize. Six years of
+transfers. Forty point seven million meticais booked in their name.
+
+
+[SCREEN: scroll to the bottom of the locality card]
+
+Underneath: who is answerable, what the law allows the money to be spent on, and
+three questions a resident has the right to ask.
+
+Every figure is parsed from the official reports by a script. If a number doesn't
+match the published total, the build fails.
+
+Nobody in Benga was told. Now they can check. Thank you.
+
+
+---------------------------------------------------------------------------
+OPTIONAL CLOSING - only if you are running under time (~15 seconds)
+
+Every parser here was written with Claude Code. And the most useful thing it did
+was kill my first idea. I set out to show allocated versus actually transferred.
+The reports say a hundred percent was executed everywhere. That story didn't
+exist. This one came out of the documents.
+
+
+---------------------------------------------------------------------------
+BEFORE YOU RECORD
+
+1. Clean window:
+   open -na "Google Chrome" --args --new-window --incognito https://eltonlaice.github.io/quinhao/
+2. Do Not Disturb ON.
+3. Set the page language to English.
+4. Cmd+Shift+5 - "Record Selected Portion" - drag around the Chrome window.
+5. OPEN "Options" AND SELECT YOUR MICROPHONE. Without this there is no audio.
+6. Record. Stop with Cmd+Ctrl+Esc.
+
+Output is a .mov on your Desktop. The form accepts mov, up to 250MB.
+
+THREE RULES
+- One take. If you stumble on a word, keep going.
+- Say the numbers slowly. They are what people remember.
+- If the audio fails, submit it silent anyway. A silent video counts. No video
+  does not.

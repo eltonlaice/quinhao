@@ -10,98 +10,65 @@ that host the extraction. The money is transferred and reported as fully execute
 missing is anything a resident can act on: why their locality received that particular
 amount, and whether anything was built with it.
 
-Quinhao turns six years of those transfers into a page a person in Nyamanhumbir or Benga
-can read, compare and question. It covers 56 localities across all 10 provinces, in English,
-Portuguese and French, with a metical/dollar toggle. The whole page is one 80 KB file with
-no external requests, no fonts and no frameworks, so it loads on a weak connection and keeps
-working offline once opened.
+Quinhao turns six years of those transfers into a page a person in Benga or Nyamanhumbir can
+read and question. It covers 56 localities across all 10 provinces, in English, Portuguese
+and French, with a metical/dollar toggle. The whole page is one 80 KB file with no external
+requests and no frameworks, so it loads on a weak connection and works offline once opened.
 
 INFORMATION SOURCES
 
-Everything comes from documents published by EITI Mozambique at eiti.org - five source PDFs
-covering six fiscal years:
-- 2019: 2020 EITI Report, Table 42 (locality level)
-- 2021: 2021 EITI Report, Table 46 (locality level)
-- 2022: 2022 EITI Report, Table 45 (individual project level)
-- 2023 and 2024: 2023-2024 EITI Report, Annex 6.1 (locality + commodity) and Annex 6.2
-  (transfers to provincial directorates)
-
-Two supporting sources: administrative boundaries from geoBoundaries (ADM1 and ADM2, gbOpen)
-and official annual average exchange rates from the World Bank (indicator PA.NUS.FCRF).
+Everything comes from EITI Mozambique reports published at eiti.org - five PDFs covering six
+fiscal years: the 2020 report (Table 42), the 2021 report (Table 46), the 2022 report
+(Table 45, project level), and the 2023-2024 report (Annexes 6.1 and 6.2). Supporting data:
+administrative boundaries from geoBoundaries, and official annual average exchange rates from
+the World Bank (indicator PA.NUS.FCRF).
 
 APPROACH TO TRUST AND ACCURACY
 
-The subject is the credibility of public numbers, so the tool cannot ask to be trusted. It
-has to be checkable.
+The subject is the credibility of public numbers, so the tool has to be checkable rather than
+trusted.
 
-Nothing is typed by hand. A script downloads each source PDF and parses it; the CSVs in the
-repository are build outputs, not manual transcription.
+Nothing is typed by hand - a script parses each source PDF, and the CSVs in the repository
+are build outputs. The build fails rather than publishes a wrong number: each year's computed
+total is asserted against the total printed in the source (88.0, 73.4, 44,608,666.89, 77.1
+and 318.7 million meticais, plus 840.30 for the provincial annex). The same gate applies to
+the map - an unmatched district name fails the build instead of silently disappearing.
 
-The build fails rather than publishes a wrong number. After parsing, the script asserts each
-year's computed total against the total printed in the source: 88.0, 73.4, 44,608,666.89,
-77.1 and 318.7 million meticais, plus 840.30 for the provincial annex. If a parser drifts,
-the run stops. The same gate applies to the map: a district name that does not match a
-polygon fails the build instead of silently disappearing. That check caught two real errors,
-"Alto Moloucue" against "Alto Molocue", and Pemba filed as "Cidade De Pemba".
+Where the source PDFs merge cells and column position is ambiguous, the affected rows are
+listed in a CORRECTIONS table in the code with the reason stated, rather than hidden in a
+heuristic. Currency is converted at each year's own official rate, never at today's.
 
-Manual corrections are explicit and auditable. The source PDFs merge district cells
-vertically and centre text inside them, so column position cannot always distinguish a
-(district, locality) pair from a (locality, activity) one. The affected rows are listed in a
-CORRECTIONS table in the code with the reason stated, rather than hidden inside a heuristic.
+What the data cannot show is stated on the page, not buried: execution is reported at around
+100%, which means the money left the treasury, not that anything was built. The strongest
+finding is EITI's own sentence, quoted directly: the budget execution report does not allow
+anyone to determine what criterion split the money between communities.
 
-Currency is converted at each year's own official rate, never at today's rate. The metical
-moved from 62.55 to 69.47 to 63.91 per dollar over this period; converting 2019 figures at a
-2024 rate would misstate them by about a tenth.
+WHAT IT SHOWS
 
-What the data cannot show is stated on the page, not buried. Execution is reported at around
-100%, which means the money left the treasury, not that anything was built. The 2022
-project-level file ships marked as a draft because its labels are unreliable. And the
-strongest finding is EITI's own sentence, quoted directly on the page: the budget execution
-report does not allow anyone to determine what criterion split the money between communities,
-nor what activities the funds went to.
+In 2024 the affected communities received 318.7 million meticais while provincial directorates
+received 840.3 million. The 2020 report shows 2.75% of the 2018 production tax should have
+been 100.59 million while 87.8 million was allocated - a 12.79 million gap. The money is
+concentrated: 86.7 of Tete's 98.0 million lands in one district, Moatize.
 
-WHAT THE DATA SHOWS
+USE OF AI TOOLS
 
-In 2024, affected communities received 318.7 million meticais while provincial directorates
-received 840.3 million - the communities living on top of the ruby, the coal and the gas get
-less than a third of what goes to the provincial capitals. The 2020 report also shows that
-2.75% of the 2018 production tax should have been 100.59 million meticais while 87.8 million
-was allocated, a 12.79 million gap the Ministry explains by counting only the mining tax and
-not the petroleum one. The money is heavily concentrated: 86.7 of Tete's 98.0 million lands
-in a single district, Moatize.
+The project was built with Claude Code. The page itself runs no model - the AI work is in the
+build.
 
-HOW AI CODING TOOLS WERE USED
+The most useful thing it did was kill my original idea. I set out to show "allocated versus
+actually transferred"; reading the annexes showed execution reported at 100% everywhere, so
+that story did not exist. The finding that replaced it came out of the documents, not a prompt.
 
-Claude Code was used throughout, and the most valuable work was not writing code.
+It then located the transfer tables across five reports in three different layouts, including
+project-level spending in the 2022 report; wrote one parser per year and corrected them until
+all five published totals matched; and caught real errors that only surfaced because an
+assertion failed, such as "Alto Moloucue" against "Alto Molocue". Data availability was
+verified before committing to the idea - the national procurement portal was returning a
+database error, which is why this project uses EITI data.
 
-It killed the original idea. The first concept was "allocated versus actually transferred".
-Reading the source annexes showed execution reported at 100% across the board - that story
-did not exist. The finding that replaced it came out of the documents, not out of a prompt.
+LIMITS
 
-PDF archaeology: locating the community-transfer tables across five reports in three
-different layouts, including project-level spending that had not been extracted before.
-
-Parser development against a hard check: each per-year parser was written, run and corrected
-until all five published totals matched. Several bugs surfaced only because an assertion
-failed.
-
-Verification rather than assumption: data availability was checked for both candidate ideas
-before committing. The national public procurement portal turned out to be returning a
-database error, which is why this project uses EITI data instead. A photograph offered for
-the page was rejected because it showed an offshore oil platform of a type Mozambique does
-not have. The chart palette was run through a colourblind-safety validator rather than chosen
-by eye, and the live page was driven in a browser at phone width in all three languages.
-
-LIMITS AND NEXT STEPS
-
-The 2022 project-level file needs a manual pass over its 41 rows. There is no field
-verification layer yet - that is the natural next step, and the reason the page ends by
-telling a resident who is answerable (the District Secretariat and the Locality Consultative
-Council), what the law permits the money to be spent on, and three specific questions they
-have the right to ask. Collecting those answers would turn 56 localities into a monitoring
-network.
-
-EITI reporting is standardised across more than 50 implementing countries, so the parsing
-approach, the verification gate and the page port directly to any of them that publishes
-subnational transfers. Running cost is zero: a static page and a script that re-runs when the
-next report is published.
+The 2022 project-level file needs a manual pass over its 41 rows and is marked as a draft.
+There is no field-verification layer yet - which is why the page ends by telling a resident
+who is answerable, what the law permits the money to be spent on, and three questions they
+have the right to ask.
