@@ -211,8 +211,8 @@ h2{font-size:1.25rem;letter-spacing:-.01em;margin:0 0 .3rem;font-weight:700}
 .sub{color:var(--mut);font-size:.9rem;margin:0 0 1.2rem}
 figure{margin:1.2rem 0}
 svg{display:block;width:100%;height:auto;overflow:visible}
-.lbl{fill:var(--fg2);font-size:13px}
-.val{fill:var(--fg);font-size:14px;font-weight:700}
+.lbl{fill:var(--fg2);font-size:17px}
+.val{fill:var(--fg);font-size:19px;font-weight:700}
 .axis{stroke:var(--line);stroke-width:1}
 blockquote{margin:1.5rem 0 0;padding:1.3rem 1.4rem;background:var(--quote);
  border-left:4px solid var(--s2);border-radius:0 .5rem .5rem 0}
@@ -328,14 +328,14 @@ const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[
 
 /* Horizontal bars: two categories, direct-labelled, 4px rounded data-end. */
 function hbars(svg,items){
-  const W=640,rowH=54,pad=170,max=Math.max(...items.map(i=>i.v));
-  svg.setAttribute("viewBox",`0 0 ${W} ${items.length*rowH+16}`);
+  const W=640,rowH=64,max=Math.max(...items.map(i=>i.v));
+  svg.setAttribute("viewBox",`0 0 ${W} ${items.length*rowH}`);
   svg.innerHTML=items.map((it,i)=>{
-    const y=i*rowH+8, w=Math.max(3,(W-pad-90)*it.v/max);
+    const y=i*rowH, w=Math.max(4,(W-95)*it.v/max);
     return `<g><title>${esc(it.k)}: ${fmt(it.v)}</title>`+
-      `<text class="lbl" x="0" y="${y+26}">${esc(it.k)}</text>`+
-      `<rect x="${pad}" y="${y+8}" width="${w}" height="28" rx="4" fill="${it.c}"/>`+
-      `<text class="val" x="${pad+w+10}" y="${y+28}">${fmt(it.v)}</text></g>`;
+      `<text class="lbl" x="0" y="${y+16}">${esc(it.k)}</text>`+
+      `<rect x="0" y="${y+24}" width="${w}" height="26" rx="4" fill="${it.c}"/>`+
+      `<text class="val" x="${w+12}" y="${y+44}">${fmt(it.v)}</text></g>`;
   }).join("");
 }
 
