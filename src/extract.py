@@ -11,6 +11,7 @@ Run: python3 src/extract.py
 """
 
 import csv
+import json
 import re
 import subprocess
 import urllib.request
@@ -265,6 +266,27 @@ def apply_corrections(rows):
     return rows
 
 
+# --- exchange rates -------------------------------------------------------
+WB_FX = ("https://api.worldbank.org/v2/country/MOZ/indicator/PA.NUS.FCRF"
+         "?format=json&date=2019:2024&per_page=20")
+
+
+def fetch_fx():
+    """Official annual average MZN per USD, World Bank indicator PA.NUS.FCRF.
+
+    One rate per year, never a single present-day rate: converting a 2019 figure
+    at a 2024 rate would misstate it by a tenth.
+    """
+    dst = RAW / "fx_worldbank.json"
+    if not dst.exists():
+        req = urllib.request.Request(WB_FX, headers={"User-Agent": "quinhao-etl/1.0"})
+        with urllib.request.urlopen(req) as r:
+            dst.write_bytes(r.read())
+    rows = json.loads(dst.read_text())[1]
+    return sorted(({"year": int(r["date"]), "mzn_per_usd": round(r["value"], 4)}
+                   for r in rows if r["value"]), key=lambda r: r["year"])
+
+
 # --- assembly -------------------------------------------------------------
 # Published totals, in millions of MZN except 2022 which is in full meticais.
 # These are the self-check: if a parser drifts, the run fails loudly.
@@ -310,6 +332,9 @@ def main():
     transfers.sort(key=lambda r: (r["year"], r["province"] or "", r["locality"] or ""))
     write_csv(ROOT / "data" / "transfers.csv", TRANSFER_FIELDS, transfers)
     write_csv(ROOT / "data" / "projects.csv", PROJECT_FIELDS, projects)
+    fx = fetch_fx()
+    assert {r["year"] for r in fx} >= {2019, 2021, 2022, 2023, 2024}, "missing an exchange rate"
+    write_csv(ROOT / "data" / "fx.csv", ["year", "mzn_per_usd"], fx)
     write_csv(ROOT / "data" / "provinces.csv",
               ["province", "allocated_mzn_m", "realised_mzn_m"], provinces)
 

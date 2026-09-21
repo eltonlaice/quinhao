@@ -33,8 +33,7 @@ T = {
         "pick": "Escolhe a tua localidade", "search": "Procurar localidade ou distrito…",
         "nomatch": "Nenhuma localidade encontrada.",
         "received": "Transferido para esta localidade", "year": "Ano", "amount": "Valor",
-        "mineral": "Actividade mineira", "total": "Total em 6 anos",
-        "mzn_m": "milhões de MZN", "no_data": "Sem transferência registada neste ano.",
+        "mineral": "Actividade mineira", "total": "Total em 6 anos", "no_data": "Sem transferência registada neste ano.",
         "next_title": "O que podes fazer com isto",
         "next_body": "Quem responde por este dinheiro é a <strong>Secretaria Distrital</strong>, "
                      "em coordenação com o <strong>Conselho Consultivo de Localidade</strong>. "
@@ -53,7 +52,7 @@ T = {
                        "que critério repartiu o valor por cada comunidade.",
         "note2022": "2022 não aparece acima: nesse ano o relatório oficial publica os gastos por projecto a nível nacional, sem repartição por localidade.",
         "hero_kicker": "O que a lei promete às comunidades mineiras",
-        "hero_h": "318,7 milhões para as comunidades.<br>840,3 milhões para as direcções provinciais.",
+        "hero_h": "{com} para as comunidades.<br>{prov} para as direcções provinciais.",
         "hero_p": "Em 2024, as comunidades que vivem em cima do rubi, do carvão e do gás receberam menos de um terço do que foi para as capitais provinciais. Ninguém explica porquê.",
         "cmp_title": "Para onde foi o dinheiro da indústria extractiva em 2024",
         "cmp_com": "Comunidades afectadas",
@@ -70,9 +69,14 @@ T = {
         "map_none": "Sem transferência registada",
         "map_all": "Todas as províncias",
         "map_year": "Ano",
-        "cap_lng": "Palma, Cabo Delgado — gás natural. A província recebeu 58,1 milhões de MZN em 2024.",
-        "cap_coal": "Moatize, Tete — carvão mineral. Tete recebeu 98,0 milhões em 2024, mais do que qualquer outra província.",
+        "cap_lng": "Palma, Cabo Delgado — gás natural. A província recebeu {cd} em 2024.",
+        "cap_coal": "Moatize, Tete — carvão mineral. Tete recebeu {te} em 2024, mais do que qualquer outra província.",
         "credits": "Imagens: ver CREDITS.md no repositório.",
+        "cur_mzn": "Meticais",
+        "cur_usd": "Dólares",
+        "mzn_m": "milhões de MZN",
+        "usd_m": "milhões de USD",
+        "fx_note": "Convertido à taxa média oficial de cada ano (Banco Mundial, PA.NUS.FCRF), não à taxa de hoje.",
         "updated": "Dados de 2019 a 2024. Actualizado em",
     },
     "en": {
@@ -83,8 +87,7 @@ T = {
         "pick": "Pick your locality", "search": "Search locality or district…",
         "nomatch": "No locality found.",
         "received": "Transferred to this locality", "year": "Year", "amount": "Amount",
-        "mineral": "Mining activity", "total": "Total over 6 years",
-        "mzn_m": "million MZN", "no_data": "No transfer recorded this year.",
+        "mineral": "Mining activity", "total": "Total over 6 years", "no_data": "No transfer recorded this year.",
         "next_title": "What you can do with this",
         "next_body": "The body answerable for this money is the <strong>District Secretariat</strong>, "
                      "working with the <strong>Locality Consultative Council</strong>. "
@@ -103,7 +106,7 @@ T = {
                        "the amount between communities cannot be determined.",
         "note2022": "2022 is missing above: that year the official report publishes spending by project at national level, with no split by locality.",
         "hero_kicker": "What the law promises mining communities",
-        "hero_h": "318.7 million to the communities.<br>840.3 million to the provincial directorates.",
+        "hero_h": "{com} to the communities.<br>{prov} to the provincial directorates.",
         "hero_p": "In 2024 the communities living on top of the ruby, the coal and the gas received less than a third of what went to the provincial capitals. Nobody explains why.",
         "cmp_title": "Where the extractive money went in 2024",
         "cmp_com": "Affected communities",
@@ -120,9 +123,14 @@ T = {
         "map_none": "No transfer recorded",
         "map_all": "All provinces",
         "map_year": "Year",
-        "cap_lng": "Palma, Cabo Delgado — natural gas. The province received 58.1 million MZN in 2024.",
-        "cap_coal": "Moatize, Tete — coal. Tete received 98.0 million in 2024, more than any other province.",
+        "cap_lng": "Palma, Cabo Delgado — natural gas. The province received {cd} in 2024.",
+        "cap_coal": "Moatize, Tete — coal. Tete received {te} in 2024, more than any other province.",
         "credits": "Images: see CREDITS.md in the repository.",
+        "cur_mzn": "Meticais",
+        "cur_usd": "Dollars",
+        "mzn_m": "million MZN",
+        "usd_m": "million USD",
+        "fx_note": "Converted at each year's official average rate (World Bank, PA.NUS.FCRF), not at today's rate.",
         "updated": "Data from 2019 to 2024. Updated",
     },
     "fr": {
@@ -133,8 +141,7 @@ T = {
         "pick": "Choisissez votre localité", "search": "Chercher une localité ou un district…",
         "nomatch": "Aucune localité trouvée.",
         "received": "Transféré à cette localité", "year": "Année", "amount": "Montant",
-        "mineral": "Activité minière", "total": "Total sur 6 ans",
-        "mzn_m": "millions MZN", "no_data": "Aucun transfert enregistré cette année.",
+        "mineral": "Activité minière", "total": "Total sur 6 ans", "no_data": "Aucun transfert enregistré cette année.",
         "next_title": "Ce que vous pouvez en faire",
         "next_body": "L'organe responsable de cet argent est le <strong>Secrétariat de district</strong>, "
                      "avec le <strong>Conseil consultatif de localité</strong>. "
@@ -153,7 +160,7 @@ T = {
                        "de répartition entre communautés ne peut être déterminé.",
         "note2022": "2022 est absent ci-dessus : cette année-là, le rapport officiel publie les dépenses par projet au niveau national, sans répartition par localité.",
         "hero_kicker": "Ce que la loi promet aux communautés minières",
-        "hero_h": "318,7 millions aux communautés.<br>840,3 millions aux directions provinciales.",
+        "hero_h": "{com} aux communautés.<br>{prov} aux directions provinciales.",
         "hero_p": "En 2024, les communautés qui vivent sur le rubis, le charbon et le gaz ont reçu moins d'un tiers de ce qui est allé aux capitales provinciales. Personne n'explique pourquoi.",
         "cmp_title": "Où est allé l'argent extractif en 2024",
         "cmp_com": "Communautés affectées",
@@ -170,9 +177,14 @@ T = {
         "map_none": "Aucun transfert enregistré",
         "map_all": "Toutes les provinces",
         "map_year": "Année",
-        "cap_lng": "Palma, Cabo Delgado — gaz naturel. La province a reçu 58,1 millions MZN en 2024.",
-        "cap_coal": "Moatize, Tete — charbon. Tete a reçu 98,0 millions en 2024, plus que toute autre province.",
+        "cap_lng": "Palma, Cabo Delgado — gaz naturel. La province a reçu {cd} en 2024.",
+        "cap_coal": "Moatize, Tete — charbon. Tete a reçu {te} en 2024, plus que toute autre province.",
         "credits": "Images : voir CREDITS.md dans le dépôt.",
+        "cur_mzn": "Meticais",
+        "cur_usd": "Dollars",
+        "mzn_m": "millions MZN",
+        "usd_m": "millions USD",
+        "fx_note": "Converti au taux moyen officiel de chaque année (Banque mondiale, PA.NUS.FCRF), non au taux actuel.",
         "updated": "Données de 2019 à 2024. Mis à jour le",
     },
 }
@@ -310,7 +322,7 @@ a{color:var(--acc)}
 <div class="wrap">
 <header>
   <div class="brand">Quinh<span>ã</span>o</div>
-  <nav id="langs" aria-label="Language"></nav>
+  <div style="display:flex;gap:.35rem;flex-wrap:wrap"><nav class="chips" id="cur" style="margin:0" role="group"></nav><nav id="langs" aria-label="Language"></nav></div>
 </header>
 
 <div class="hero">
@@ -346,6 +358,7 @@ a{color:var(--acc)}
   <p class="sub" id="trend-s"></p>
   <figure><svg id="trend" viewBox="0 0 640 220" role="img" aria-labelledby="trend-t"></svg></figure>
   <p class="note" id="trend-note"></p>
+  <p class="note" id="fx-note"></p>
 </section>
 
 <section>
@@ -408,13 +421,22 @@ a{color:var(--acc)}
 
 <script>
 const DATA=__DATA__, T=__T__, USES=__USES__, YEARS=__YEARS__,
-      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__, MAP=__MAP__;
-let year=2024, prov=null;
+      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__, MAP=__MAP__, FX=__FX__;
+let year=2024, prov=null, cur="MZN";
+
+/* Each year converts at its own average rate; a 2019 figure at a 2024 rate would
+   misstate it by about a tenth. */
+function conv(v,y){return cur==="MZN"?v:v/(FX[String(y)]||FX["2024"]);}
+function unit(){return cur==="MZN"?T[lang].mzn_m:T[lang].usd_m;}
 let lang=(navigator.language||"pt").slice(0,2); if(!T[lang]) lang="pt";
 let picked=null;
 const $=id=>document.getElementById(id);
 const loc=()=>lang==="en"?"en-GB":lang==="fr"?"fr-FR":"pt-PT";
-const fmt=n=>n.toLocaleString(loc(),{minimumFractionDigits:1,maximumFractionDigits:1});
+function fmt(n){
+  const d=cur==="MZN"?1:(n>=1?2:n>=0.01?3:0);
+  if(cur==="USD"&&n>0&&n<0.005) return "< 0,01".replace(",",lang==="en"?".":",");
+  return n.toLocaleString(loc(),{minimumFractionDigits:d,maximumFractionDigits:d});
+}
 /* One glyph per commodity: identity at a glance, zero bytes over the wire. */
 const ICONS={
  rubi:'<path d="M5 3h14l3 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="var(--bg)" stroke-width="1.1"/>',
@@ -465,7 +487,7 @@ function vbars(svg,items,color){
 /* Province totals for a year, straight from the same locality rows the list uses. */
 function provTotals(y){
   const t={};
-  for(const e of DATA){const v=e.y[String(y)]; if(v!=null) t[e.p]=(t[e.p]||0)+v;}
+  for(const e of DATA){const v=e.y[String(y)]; if(v!=null) t[e.p]=(t[e.p]||0)+conv(v,y);}
   return t;
 }
 
@@ -480,7 +502,7 @@ function drawMap(){
     const v=tot[name]||0;
     return `<path d="${d}" fill="${step(v)}" data-p="${esc(name)}" tabindex="0" role="button"`+
       (prov===name?' aria-current="true"':"")+
-      `><title>${esc(name)}: ${v>0?fmt(v)+" "+T[lang].mzn_m:T[lang].map_none}</title></path>`;
+      `><title>${esc(name)}: ${v>0?fmt(v)+" "+unit():T[lang].map_none}</title></path>`;
   }).join("");
   $("plist").innerHTML=Object.entries(MAP).map(([n])=>[n,tot[n]||0])
     .sort((a,b)=>b[1]-a[1]).map(([n,v])=>
@@ -500,6 +522,11 @@ $("years").addEventListener("click",e=>{
   [...$("years").children].forEach(b=>b.setAttribute("aria-pressed",+b.dataset.y===year));
 });
 
+$("cur").addEventListener("click",e=>{
+  const c=e.target.dataset.c; if(!c) return;
+  cur=c; render();
+});
+
 $("langs").innerHTML=Object.keys(T).map(k=>
   `<button data-l="${k}" type="button">${T[k].lang_name}</button>`).join("");
 $("langs").onclick=e=>{const l=e.target.dataset.l; if(l){lang=l; render();}};
@@ -512,27 +539,34 @@ function render(){
   const text={kicker:t.hero_kicker,herop:t.hero_p,"cmp-t":t.cmp_title,
     quote:"“"+t.quote+"”","quote-src":t.quote_src,"trend-t":t.trend_title,
     "trend-note":t.trend_note,"find-t":t.find_title,picklbl:t.pick,nomatch:t.nomatch,
-    "h-year":t.year,"h-amt":t.amount,"r-totlbl":t.total,"r-unit":t.mzn_m,
+    "h-year":t.year,"h-amt":t.amount,"r-totlbl":t.total,"r-unit":unit(),
     "n-title":t.next_title,"a-title":t.ask_title,"s-title":t.source_title,
     "s-body":t.source_body,"c-title":t.caveat_title,"c-body":t.caveat_body,
-    "r-note2022":t.note2022,"f-upd":t.updated,cap1:t.cap_lng,cap2:t.cap_coal,credits:t.credits,"cmp-s":t.mzn_m,"trend-s":t.mzn_m};
+    "r-note2022":t.note2022,"f-upd":t.updated,credits:t.credits,"cmp-s":unit(),"trend-s":unit(),"fx-note":cur==="USD"?t.fx_note:""};
   for(const [id,v] of Object.entries(text)) $(id).textContent=v;
-  $("heroh").innerHTML=t.hero_h;
-  $("im1").alt=t.cap_lng; $("im2").alt=t.cap_coal;
+  const p24=provTotals(2024), money=v=>fmt(v)+" "+unit();
+  const fill=str=>str.replace("{com}",money(conv(NATIONAL["2024"],2024)))
+    .replace("{prov}",money(conv(PROVINCES,2024)))
+    .replace("{cd}",money(p24["Cabo Delgado"]||0)).replace("{te}",money(p24["Tete"]||0));
+  $("heroh").innerHTML=fill(t.hero_h);
+  $("cap1").textContent=fill(t.cap_lng); $("cap2").textContent=fill(t.cap_coal);
+  $("im1").alt=fill(t.cap_lng); $("im2").alt=fill(t.cap_coal);
   $("n-body").innerHTML=t.next_body;
   $("q").placeholder=t.search;
   $("n-uses").innerHTML=USES[lang].map(u=>`<li>${esc(u)}</li>`).join("");
   $("a-list").innerHTML=t.asks.map(a=>`<li>${esc(a)}</li>`).join("");
   [...$("langs").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
 
+  $("cur").innerHTML=[["MZN",t.cur_mzn],["USD",t.cur_usd]].map(([c,n])=>
+    `<button type="button" data-c="${c}" aria-pressed="${c===cur}">${n}</button>`).join("");
   $("map-t").textContent=t.map_title; $("map-s").textContent=t.map_sub;
   $("lg-low").textContent=t.map_low; $("lg-high").textContent=t.map_high;
   $("years").innerHTML=YEARS.map(y=>
     `<button type="button" data-y="${y}" aria-pressed="${y===year}">${y}</button>`).join("");
   drawMap();
-  hbars($("cmp"),[{k:t.cmp_com,v:NATIONAL["2024"],c:css("--s1")},
-                  {k:t.cmp_prov,v:PROVINCES,c:css("--s2")}]);
-  vbars($("trend"),Object.entries(NATIONAL).map(([k,v])=>({k,v})),css("--s1"));
+  hbars($("cmp"),[{k:t.cmp_com,v:conv(NATIONAL["2024"],2024),c:css("--s1")},
+                  {k:t.cmp_prov,v:conv(PROVINCES,2024),c:css("--s2")}]);
+  vbars($("trend"),Object.entries(NATIONAL).map(([k,v])=>({k,v:conv(v,k)})),css("--s1"));
   search(); if(picked) show(picked);
 }
 
@@ -560,12 +594,12 @@ function show(e){
   $("result").hidden=false;
   $("r-title").textContent=`${t.received}: ${e.l}`;
   $("r-where").innerHTML=icon(e.m)+esc([e.d,e.p,e.m].filter(Boolean).join(" · "));
-  const got=YEARS.filter(y=>e.y[String(y)]!=null).map(y=>({k:String(y),v:e.y[String(y)]}));
+  const got=YEARS.filter(y=>e.y[String(y)]!=null).map(y=>({k:String(y),v:conv(e.y[String(y)],y)}));
   vbars($("r-chart"),got.length?got:[{k:"—",v:0}],css("--s1"));
   $("r-total").textContent=fmt(got.reduce((a,b)=>a+b.v,0));
   $("r-rows").innerHTML=YEARS.map(y=>{
     const v=e.y[String(y)];
-    return `<tr><td>${y}</td><td class="n">${v!=null?fmt(v)+" "+t.mzn_m:
+    return `<tr><td>${y}</td><td class="n">${v!=null?fmt(conv(v,y))+" "+unit():
       '<span class="note">'+t.no_data+'</span>'}</td></tr>`;
   }).join("");
 }
@@ -583,6 +617,8 @@ def main():
     data = load()
     with (ROOT / "data" / "provinces.csv").open(encoding="utf-8") as fh:
         provinces = round(sum(float(r["allocated_mzn_m"]) for r in csv.DictReader(fh)), 1)
+    with (ROOT / "data" / "fx.csv").open(encoding="utf-8") as fh:
+        fx = {r["year"]: float(r["mzn_per_usd"]) for r in csv.DictReader(fh)}
     map_paths, mw, mh = build_map.build()
     out = ROOT / "docs" / "index.html"
     out.parent.mkdir(exist_ok=True)
@@ -594,6 +630,7 @@ def main():
         "__YEARS__": json.dumps(YEARS),
         "__NATIONAL__": json.dumps({str(y): v for y, v in NATIONAL.items()}),
         "__PROVINCES__": json.dumps(provinces),
+        "__FX__": json.dumps(fx),
         "__MAP__": json.dumps(map_paths, ensure_ascii=False, separators=(",", ":")),
         "__MAPVB__": f"0 0 {mw} {mh}",
         "__TAGLINE__": T["pt"]["tagline"],
