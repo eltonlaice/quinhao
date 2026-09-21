@@ -70,6 +70,9 @@ T = {
         "map_none": "Sem transferência registada",
         "map_all": "Todas as províncias",
         "map_year": "Ano",
+        "cap_lng": "Palma, Cabo Delgado — gás natural. A província recebeu 58,1 milhões de MZN em 2024.",
+        "cap_coal": "Moatize, Tete — carvão mineral. Tete recebeu 98,0 milhões em 2024, mais do que qualquer outra província.",
+        "credits": "Imagens: ver CREDITS.md no repositório.",
         "updated": "Dados de 2019 a 2024. Actualizado em",
     },
     "en": {
@@ -117,6 +120,9 @@ T = {
         "map_none": "No transfer recorded",
         "map_all": "All provinces",
         "map_year": "Year",
+        "cap_lng": "Palma, Cabo Delgado — natural gas. The province received 58.1 million MZN in 2024.",
+        "cap_coal": "Moatize, Tete — coal. Tete received 98.0 million in 2024, more than any other province.",
+        "credits": "Images: see CREDITS.md in the repository.",
         "updated": "Data from 2019 to 2024. Updated",
     },
     "fr": {
@@ -164,6 +170,9 @@ T = {
         "map_none": "Aucun transfert enregistré",
         "map_all": "Toutes les provinces",
         "map_year": "Année",
+        "cap_lng": "Palma, Cabo Delgado — gaz naturel. La province a reçu 58,1 millions MZN en 2024.",
+        "cap_coal": "Moatize, Tete — charbon. Tete a reçu 98,0 millions en 2024, plus que toute autre province.",
+        "credits": "Images : voir CREDITS.md dans le dépôt.",
         "updated": "Données de 2019 à 2024. Mis à jour le",
     },
 }
@@ -271,6 +280,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
 .strata{position:absolute;inset:auto 0 -1rem 0;height:120px;z-index:-1;opacity:.5;
  -webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
 .ico{width:1.05em;height:1.05em;vertical-align:-.16em;margin-right:.3em;flex:none}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0 0}
+@media(max-width:33rem){.shots{grid-template-columns:1fr}}
+.shots figure{margin:0}
+.shots img{width:100%;height:auto;aspect-ratio:15/9;object-fit:cover;border-radius:.6rem;
+ background:var(--quote);display:block}
+.shots figcaption{font-size:.85rem;color:var(--mut);margin-top:.5rem;line-height:1.45}
 .chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 1rem}
 .chips button{font:inherit;font-size:.85rem;padding:.35rem .8rem;border:1px solid var(--line);
  background:var(--surface);color:var(--fg2);border-radius:999px;cursor:pointer}
@@ -307,6 +322,13 @@ a{color:var(--acc)}
 <p class="kicker" id="kicker"></p>
 <h1 id="heroh"></h1>
 <p class="lede" id="herop"></p>
+</div>
+
+<div class="shots">
+  <figure><img src="img/lng-afungi.webp" width="900" height="540" loading="lazy" decoding="async" alt="" id="im1">
+    <figcaption id="cap1"></figcaption></figure>
+  <figure><img src="img/moatize-coal.webp" width="900" height="540" loading="lazy" decoding="async" alt="" id="im2">
+    <figcaption id="cap2"></figcaption></figure>
 </div>
 
 <section>
@@ -379,7 +401,7 @@ a{color:var(--acc)}
   <p class="note" id="c-body"></p>
 </section>
 
-<footer><span id="f-upd"></span> __BUILT__ ·
+<footer><span id="credits"></span><br><span id="f-upd"></span> __BUILT__ ·
 <a href="https://github.com/eltonlaice/quinhao">github.com/eltonlaice/quinhao</a> ·
 <a href="https://eiti.org/countries/mozambique">eiti.org</a></footer>
 </div>
@@ -493,9 +515,10 @@ function render(){
     "h-year":t.year,"h-amt":t.amount,"r-totlbl":t.total,"r-unit":t.mzn_m,
     "n-title":t.next_title,"a-title":t.ask_title,"s-title":t.source_title,
     "s-body":t.source_body,"c-title":t.caveat_title,"c-body":t.caveat_body,
-    "r-note2022":t.note2022,"f-upd":t.updated,"cmp-s":t.mzn_m,"trend-s":t.mzn_m};
+    "r-note2022":t.note2022,"f-upd":t.updated,cap1:t.cap_lng,cap2:t.cap_coal,credits:t.credits,"cmp-s":t.mzn_m,"trend-s":t.mzn_m};
   for(const [id,v] of Object.entries(text)) $(id).textContent=v;
   $("heroh").innerHTML=t.hero_h;
+  $("im1").alt=t.cap_lng; $("im2").alt=t.cap_coal;
   $("n-body").innerHTML=t.next_body;
   $("q").placeholder=t.search;
   $("n-uses").innerHTML=USES[lang].map(u=>`<li>${esc(u)}</li>`).join("");
