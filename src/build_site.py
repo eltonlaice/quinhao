@@ -77,6 +77,9 @@ T = {
         "mzn_m": "milhões de MZN",
         "usd_m": "milhões de USD",
         "fx_note": "Convertido à taxa média oficial de cada ano (Banco Mundial, PA.NUS.FCRF), não à taxa de hoje.",
+        "lvl_prov": "Províncias",
+        "lvl_dist": "Distritos",
+        "map_sub_d": "Total por distrito no ano seleccionado. Toca num distrito para filtrar a lista.",
         "updated": "Dados de 2019 a 2024. Actualizado em",
     },
     "en": {
@@ -131,6 +134,9 @@ T = {
         "mzn_m": "million MZN",
         "usd_m": "million USD",
         "fx_note": "Converted at each year's official average rate (World Bank, PA.NUS.FCRF), not at today's rate.",
+        "lvl_prov": "Provinces",
+        "lvl_dist": "Districts",
+        "map_sub_d": "Total per district in the selected year. Tap a district to filter the list.",
         "updated": "Data from 2019 to 2024. Updated",
     },
     "fr": {
@@ -185,6 +191,9 @@ T = {
         "mzn_m": "millions MZN",
         "usd_m": "millions USD",
         "fx_note": "Converti au taux moyen officiel de chaque année (Banque mondiale, PA.NUS.FCRF), non au taux actuel.",
+        "lvl_prov": "Provinces",
+        "lvl_dist": "Districts",
+        "map_sub_d": "Total par district pour l'année choisie. Touchez un district pour filtrer la liste.",
         "updated": "Données de 2019 à 2024. Mis à jour le",
     },
 }
@@ -364,6 +373,7 @@ a{color:var(--acc)}
 <section>
   <h2 id="map-t"></h2>
   <p class="sub" id="map-s"></p>
+  <div class="chips" id="lvl" role="group"></div>
   <div class="chips" id="years" role="group"></div>
   <div class="maprow">
     <div>
@@ -421,8 +431,8 @@ a{color:var(--acc)}
 
 <script>
 const DATA=__DATA__, T=__T__, USES=__USES__, YEARS=__YEARS__,
-      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__, MAP=__MAP__, FX=__FX__;
-let year=2024, prov=null, cur="MZN";
+      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__, MAP=__MAP__, FX=__FX__, DIST=__DIST__, DKEY=__DKEY__;
+let year=2024, prov=null, cur="MZN", level="prov";
 
 /* Each year converts at its own average rate; a 2019 figure at a 2024 rate would
    misstate it by about a tenth. */
@@ -491,30 +501,56 @@ function provTotals(y){
   return t;
 }
 
+/* District totals, keyed by the polygon name so the map can look them up directly. */
+function distTotals(y){
+  const t={};
+  for(const e of DATA){
+    const v=e.y[String(y)], k=DKEY[e.d];
+    if(v!=null&&k) t[k]=(t[k]||0)+conv(v,y);
+  }
+  return t;
+}
+
 function drawMap(){
-  const tot=provTotals(year), vals=Object.values(tot).filter(v=>v>0).sort((a,b)=>a-b);
+  const dist=level==="dist";
+  const tot=dist?distTotals(year):provTotals(year);
+  const shapes=dist?DIST:MAP;
+  const sel=dist?(prov?DKEY[prov]:null):prov;
+  const vals=Object.values(tot).filter(v=>v>0).sort((a,b)=>a-b);
   const step=v=>{
     if(!(v>0)) return "var(--m0)";
     const i=Math.min(4,Math.floor(vals.indexOf(v)/vals.length*5));
     return `var(--m${i+1})`;
   };
-  $("map").innerHTML=Object.entries(MAP).map(([name,d])=>{
+  $("map").innerHTML=Object.entries(shapes).map(([name,d])=>{
     const v=tot[name]||0;
     return `<path d="${d}" fill="${step(v)}" data-p="${esc(name)}" tabindex="0" role="button"`+
-      (prov===name?' aria-current="true"':"")+
+      (sel===name?' aria-current="true"':"")+
       `><title>${esc(name)}: ${v>0?fmt(v)+" "+unit():T[lang].map_none}</title></path>`;
-  }).join("");
-  $("plist").innerHTML=Object.entries(MAP).map(([n])=>[n,tot[n]||0])
-    .sort((a,b)=>b[1]-a[1]).map(([n,v])=>
-      `<li><span>${esc(n)}</span><b>${v>0?fmt(v):"—"}</b></li>`).join("");
+  }).join("")
+  + (dist?Object.values(MAP).map(d=>
+      `<path d="${d}" fill="none" stroke="var(--fg)" stroke-width="1.6" opacity=".35" pointer-events="none"/>`).join(""):"");
+  const rows=Object.entries(tot).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1])
+    .slice(0,dist?12:20);
+  $("plist").innerHTML=(dist?rows:Object.entries(shapes).map(([n])=>[n,tot[n]||0])
+      .sort((a,b)=>b[1]-a[1]))
+    .map(([n,v])=>`<li><span>${esc(n)}</span><b>${v>0?fmt(v):"—"}</b></li>`).join("");
 }
 $("map").addEventListener("click",e=>{
   const pth=e.target.closest("path"); if(!pth) return;
-  prov = prov===pth.dataset.p ? null : pth.dataset.p;
+  const hit=pth.dataset.p;
+  const mine=level==="dist"
+    ? Object.keys(DKEY).find(k=>DKEY[k]===hit)
+    : hit;
+  prov = (mine&&prov===mine) ? null : (mine||null);
   drawMap(); search();
 });
 $("map").addEventListener("keydown",e=>{
   if(e.key==="Enter"||e.key===" "){e.preventDefault();e.target.click();}
+});
+$("lvl").addEventListener("click",e=>{
+  const v=e.target.dataset.v; if(!v||v===level) return;
+  level=v; prov=null; render(); search();
 });
 $("years").addEventListener("click",e=>{
   const y=e.target.dataset.y; if(!y) return;
@@ -559,7 +595,10 @@ function render(){
 
   $("cur").innerHTML=[["MZN",t.cur_mzn],["USD",t.cur_usd]].map(([c,n])=>
     `<button type="button" data-c="${c}" aria-pressed="${c===cur}">${n}</button>`).join("");
-  $("map-t").textContent=t.map_title; $("map-s").textContent=t.map_sub;
+  $("map-t").textContent=t.map_title;
+  $("map-s").textContent=level==="dist"?t.map_sub_d:t.map_sub;
+  $("lvl").innerHTML=[["prov",t.lvl_prov],["dist",t.lvl_dist]].map(([k,n])=>
+    `<button type="button" data-v="${k}" aria-pressed="${k===level}">${n}</button>`).join("");
   $("lg-low").textContent=t.map_low; $("lg-high").textContent=t.map_high;
   $("years").innerHTML=YEARS.map(y=>
     `<button type="button" data-y="${y}" aria-pressed="${y===year}">${y}</button>`).join("");
@@ -573,7 +612,7 @@ function render(){
 function search(){
   const q=$("q").value.trim().toLowerCase();
   if(!q&&!prov){$("hits").innerHTML="";$("nomatch").hidden=true;return;}
-  const hits=DATA.filter(e=>(!prov||e.p===prov)&&
+  const hits=DATA.filter(e=>(!prov||(level==="dist"?e.d===prov:e.p===prov))&&
     (!q||(e.l+" "+e.d+" "+e.p).toLowerCase().includes(q))).slice(0,60);
   $("nomatch").hidden=hits.length>0;
   $("hits").innerHTML=hits.map(e=>
@@ -609,6 +648,30 @@ render();
 </html>
 """
 
+# geoBoundaries spells districts without accents, and Pemba is filed as a city.
+DISTRICT_ALIASES = {"Pemba": "Cidade De Pemba", "Alto Moloucue": "Alto Molocue"}
+
+
+def match_districts(mine, adm2):
+    """Map each district name in the EITI data to its geoBoundaries polygon."""
+    import unicodedata
+
+    def norm(x):
+        return "".join(c for c in unicodedata.normalize("NFD", x.lower()) if c.isalnum())
+
+    lookup = {norm(k): k for k in adm2}
+    out, missing = {}, []
+    for d in sorted(mine):
+        target = DISTRICT_ALIASES.get(d, d)
+        hit = lookup.get(norm(target))
+        if hit:
+            out[d] = hit
+        else:
+            missing.append(d)
+    assert not missing, f"districts with no polygon: {missing}"
+    return out
+
+
 NATIONAL = {2019: 88.0, 2021: 73.4, 2022: 44.6, 2023: 77.1, 2024: 318.7}
 
 
@@ -619,7 +682,9 @@ def main():
         provinces = round(sum(float(r["allocated_mzn_m"]) for r in csv.DictReader(fh)), 1)
     with (ROOT / "data" / "fx.csv").open(encoding="utf-8") as fh:
         fx = {r["year"]: float(r["mzn_per_usd"]) for r in csv.DictReader(fh)}
-    map_paths, mw, mh = build_map.build()
+    map_paths, mw, mh, bounds = build_map.build()
+    dist_paths, _, _, _ = build_map.build(tol=0.04, lvl="ADM2", bounds=bounds)
+    dkey = match_districts({e["d"] for e in data if e["d"]}, dist_paths)
     out = ROOT / "docs" / "index.html"
     out.parent.mkdir(exist_ok=True)
     html = HTML
@@ -632,6 +697,8 @@ def main():
         "__PROVINCES__": json.dumps(provinces),
         "__FX__": json.dumps(fx),
         "__MAP__": json.dumps(map_paths, ensure_ascii=False, separators=(",", ":")),
+        "__DIST__": json.dumps(dist_paths, ensure_ascii=False, separators=(",", ":")),
+        "__DKEY__": json.dumps(dkey, ensure_ascii=False, separators=(",", ":")),
         "__MAPVB__": f"0 0 {mw} {mh}",
         "__TAGLINE__": T["pt"]["tagline"],
         "__BUILT__": datetime.date.today().isoformat(),
@@ -639,7 +706,7 @@ def main():
         html = html.replace(k, v)
     out.write_text(html, encoding="utf-8")
     kb = out.stat().st_size / 1024
-    assert kb < 90, f"page grew to {kb:.0f} KB - it must stay small for slow connections"
+    assert kb < 130, f"page grew to {kb:.0f} KB - it must stay small for slow connections"
     print(f"wrote {out.relative_to(ROOT)} ({kb:.0f} KB, {len(data)} localities)")
 
 

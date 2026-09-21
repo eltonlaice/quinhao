@@ -14,16 +14,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 SRC = ("https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/"
-       "gbOpen/MOZ/ADM1/geoBoundaries-MOZ-ADM1_simplified.geojson")
+       "gbOpen/MOZ/{lvl}/geoBoundaries-MOZ-{lvl}_simplified.geojson")
 W, H = 300, 620          # viewBox; Mozambique is far taller than it is wide
 MIN_RING_AREA = 0.05     # drop offshore islets that render as single pixels
 
 
-def fetch():
-    dst = RAW / "moz_adm1.geojson"
+def fetch(lvl="ADM1"):
+    dst = RAW / f"moz_{lvl.lower()}.geojson"
     if not dst.exists():
         RAW.mkdir(parents=True, exist_ok=True)
-        req = urllib.request.Request(SRC, headers={"User-Agent": "quinhao-etl/1.0"})
+        req = urllib.request.Request(SRC.format(lvl=lvl), headers={"User-Agent": "quinhao-etl/1.0"})
         with urllib.request.urlopen(req) as r:
             dst.write_bytes(r.read())
     return json.loads(dst.read_text())
@@ -53,8 +53,9 @@ def ring_area(r):
                    for i in range(len(r) - 1))) / 2
 
 
-def build(tol=0.02):
-    gj = fetch()
+def build(tol=0.02, lvl="ADM1", bounds=None):
+    """bounds pins ADM2 to the ADM1 projection so the two layers line up exactly."""
+    gj = fetch(lvl)
     rings = []
     for f in gj["features"]:
         g = f["geometry"]
@@ -62,15 +63,19 @@ def build(tol=0.02):
         keep = [p[0] for p in polys if ring_area(p[0]) >= MIN_RING_AREA]
         rings.append((f["properties"]["shapeName"], keep))
 
-    xs = [x for _, ps in rings for p in ps for x, _ in p]
-    ys = [y for _, ps in rings for p in ps for _, y in p]
-    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    if bounds:
+        x0, x1, y0, y1 = bounds
+    else:
+        xs = [x for _, ps in rings for p in ps for x, _ in p]
+        ys = [y for _, ps in rings for p in ps for _, y in p]
+        x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
     sx, sy = W / (x1 - x0), H / (y1 - y0)
     scale = min(sx, sy)
     ox = (W - (x1 - x0) * scale) / 2
     oy = (H - (y1 - y0) * scale) / 2
 
     out = {}
+    _ = (x0, x1, y0, y1)
     for name, polys in rings:
         d = []
         for ring in polys:
@@ -78,11 +83,11 @@ def build(tol=0.02):
                    for x, y in simplify(ring, tol)]
             d.append("M" + "L".join(f"{x} {y}" for x, y in pts) + "Z")
         out[name] = "".join(d)
-    return out, W, H
+    return out, W, H, (x0, x1, y0, y1)
 
 
 if __name__ == "__main__":
-    paths, w, h = build()
+    paths, w, h, _b = build()
     blob = json.dumps(paths, separators=(",", ":"))
     print(f"{len(paths)} provinces, {len(blob)/1024:.1f} KB of path data, viewBox {w}x{h}")
     for k, v in paths.items():
