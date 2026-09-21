@@ -8,6 +8,8 @@ Run: python3 src/build_site.py   ->   docs/index.html
 
 import csv
 import json
+
+import build_map
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -61,6 +63,13 @@ T = {
         "trend_title": "Total transferido às comunidades, por ano",
         "trend_note": "Em 2022 o valor cai 39% e em 2024 quadruplica. Os relatórios não explicam nenhuma das duas variações.",
         "find_title": "Encontra a tua localidade",
+        "map_title": "Onde caem os 2,75%",
+        "map_sub": "Total por província no ano seleccionado. Toca numa província para filtrar a lista.",
+        "map_low": "menos",
+        "map_high": "mais",
+        "map_none": "Sem transferência registada",
+        "map_all": "Todas as províncias",
+        "map_year": "Ano",
         "updated": "Dados de 2019 a 2024. Actualizado em",
     },
     "en": {
@@ -101,6 +110,13 @@ T = {
         "trend_title": "Total transferred to communities, by year",
         "trend_note": "In 2022 the figure falls 39%; in 2024 it quadruples. The reports explain neither move.",
         "find_title": "Find your locality",
+        "map_title": "Where the 2.75% lands",
+        "map_sub": "Total per province in the selected year. Tap a province to filter the list.",
+        "map_low": "less",
+        "map_high": "more",
+        "map_none": "No transfer recorded",
+        "map_all": "All provinces",
+        "map_year": "Year",
         "updated": "Data from 2019 to 2024. Updated",
     },
     "fr": {
@@ -141,6 +157,13 @@ T = {
         "trend_title": "Total transféré aux communautés, par année",
         "trend_note": "En 2022 le montant chute de 39 % ; en 2024 il quadruple. Les rapports n'expliquent ni l'un ni l'autre.",
         "find_title": "Trouvez votre localité",
+        "map_title": "Où atterrissent les 2,75 %",
+        "map_sub": "Total par province pour l'année choisie. Touchez une province pour filtrer la liste.",
+        "map_low": "moins",
+        "map_high": "plus",
+        "map_none": "Aucun transfert enregistré",
+        "map_all": "Toutes les provinces",
+        "map_year": "Année",
         "updated": "Données de 2019 à 2024. Mis à jour le",
     },
 }
@@ -175,16 +198,19 @@ HTML = r"""<!DOCTYPE html>
   color-scheme:light;
   --bg:#fcfcfb; --surface:#fff; --fg:#0b0b0b; --fg2:#52514e; --mut:#77746d;
   --line:#e3e0d9; --acc:#1c5cab; --s1:#2a78d6; --s2:#eb6834; --quote:#f4f1ea;
+  --m1:#9ec5f4; --m2:#6da7ec; --m3:#3987e5; --m4:#256abf; --m5:#104281; --m0:#e8e5de;
 }
 @media(prefers-color-scheme:dark){:root:where(:not([data-theme=light])){
   color-scheme:dark;
   --bg:#141413; --surface:#1a1a19; --fg:#fff; --fg2:#c3c2b7; --mut:#8e8b82;
   --line:#2f2e2b; --acc:#86b6ef; --s1:#3987e5; --s2:#d95926; --quote:#201f1d;
+  --m1:#184f95; --m2:#256abf; --m3:#3987e5; --m4:#6da7ec; --m5:#b7d3f6; --m0:#2a2926;
 }}
 :root[data-theme=dark]{
   color-scheme:dark;
   --bg:#141413; --surface:#1a1a19; --fg:#fff; --fg2:#c3c2b7; --mut:#8e8b82;
   --line:#2f2e2b; --acc:#86b6ef; --s1:#3987e5; --s2:#d95926; --quote:#201f1d;
+  --m1:#184f95; --m2:#256abf; --m3:#3987e5; --m4:#6da7ec; --m5:#b7d3f6; --m0:#2a2926;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -241,6 +267,25 @@ li{margin:.35rem 0}
 .note{color:var(--mut);font-size:.88rem}
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
  font-size:.85rem;color:var(--mut)}
+.hero{position:relative;padding-top:1rem}
+.strata{position:absolute;inset:auto 0 -1rem 0;height:120px;z-index:-1;opacity:.5;
+ -webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+.ico{width:1.05em;height:1.05em;vertical-align:-.16em;margin-right:.3em;flex:none}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 1rem}
+.chips button{font:inherit;font-size:.85rem;padding:.35rem .8rem;border:1px solid var(--line);
+ background:var(--surface);color:var(--fg2);border-radius:999px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:600}
+.maprow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.5rem;align-items:start}
+@media(max-width:33rem){.maprow{grid-template-columns:1fr}}
+#map path{stroke:var(--bg);stroke-width:1.2;cursor:pointer}
+#map path:hover{stroke:var(--fg);stroke-width:2}
+#map path[aria-current=true]{stroke:var(--fg);stroke-width:2.5}
+.legend{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--mut);margin-top:.7rem}
+.legend i{width:1.4rem;height:.7rem;border-radius:2px;display:inline-block}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;
+ border-bottom:1px solid var(--line);font-size:.93rem}
+.plist b{font-weight:700}
 a{color:var(--acc)}
 [hidden]{display:none!important}
 @media print{nav{display:none}}
@@ -253,9 +298,16 @@ a{color:var(--acc)}
   <nav id="langs" aria-label="Language"></nav>
 </header>
 
+<div class="hero">
+<svg class="strata" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 96 Q150 74 300 88 T600 78 V120 H0Z" fill="var(--s1)" opacity=".16"/>
+  <path d="M0 108 Q150 90 300 102 T600 94 V120 H0Z" fill="var(--s2)" opacity=".2"/>
+  <path d="M0 118 Q150 106 300 114 T600 108 V120 H0Z" fill="var(--s1)" opacity=".3"/>
+</svg>
 <p class="kicker" id="kicker"></p>
 <h1 id="heroh"></h1>
 <p class="lede" id="herop"></p>
+</div>
 
 <section>
   <h2 id="cmp-t"></h2>
@@ -272,6 +324,22 @@ a{color:var(--acc)}
   <p class="sub" id="trend-s"></p>
   <figure><svg id="trend" viewBox="0 0 640 220" role="img" aria-labelledby="trend-t"></svg></figure>
   <p class="note" id="trend-note"></p>
+</section>
+
+<section>
+  <h2 id="map-t"></h2>
+  <p class="sub" id="map-s"></p>
+  <div class="chips" id="years" role="group"></div>
+  <div class="maprow">
+    <div>
+      <svg id="map" viewBox="__MAPVB__" role="img" aria-labelledby="map-t"></svg>
+      <div class="legend"><span id="lg-low"></span>
+        <i style="background:var(--m1)"></i><i style="background:var(--m2)"></i>
+        <i style="background:var(--m3)"></i><i style="background:var(--m4)"></i>
+        <i style="background:var(--m5)"></i><span id="lg-high"></span></div>
+    </div>
+    <ul class="plist" id="plist"></ul>
+  </div>
 </section>
 
 <section>
@@ -318,12 +386,30 @@ a{color:var(--acc)}
 
 <script>
 const DATA=__DATA__, T=__T__, USES=__USES__, YEARS=__YEARS__,
-      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__;
+      NATIONAL=__NATIONAL__, PROVINCES=__PROVINCES__, MAP=__MAP__;
+let year=2024, prov=null;
 let lang=(navigator.language||"pt").slice(0,2); if(!T[lang]) lang="pt";
 let picked=null;
 const $=id=>document.getElementById(id);
 const loc=()=>lang==="en"?"en-GB":lang==="fr"?"fr-FR":"pt-PT";
 const fmt=n=>n.toLocaleString(loc(),{minimumFractionDigits:1,maximumFractionDigits:1});
+/* One glyph per commodity: identity at a glance, zero bytes over the wire. */
+const ICONS={
+ rubi:'<path d="M5 3h14l3 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="var(--bg)" stroke-width="1.1"/>',
+ carvao:'<path d="M7 5 3 13l5 6 7-1 6-6-4-7z"/><path d="m7 5 4 7-3 7M15 18l-4-6 9-2" fill="none" stroke="var(--bg)" stroke-width="1.1"/>',
+ gas:'<path d="M12 2c3 4 5 6 5 9a5 5 0 1 1-10 0c0-2 1-3 2-5 1 2 2 2 2 4 0-3 .5-5 1-8z"/>',
+ areia:'<circle cx="7" cy="16" r="3"/><circle cx="14" cy="17" r="2.2"/><circle cx="11" cy="10" r="2.6"/><circle cx="18" cy="12" r="1.8"/><circle cx="5" cy="9" r="1.6"/>',
+ agua:'<path d="M12 2c4 6 6 8 6 11a6 6 0 0 1-12 0c0-3 2-5 6-11z"/>',
+ ouro:'<path d="M3 8h18l-2 10H5z"/><path d="M3 8 6 4h12l3 4" fill="none" stroke="var(--bg)" stroke-width="1.1"/>',
+ pedra:'<path d="M4 9 9 4l7 1 4 6-3 9H7z"/>'};
+function icon(activity){
+  const a=(activity||"").toLowerCase();
+  const k=/rubi/.test(a)?"rubi":/carv/.test(a)?"carvao":/g[aá]s|lng|condes/.test(a)?"gas":
+    /areia|ilmen|iimen|zirc|titan|turmal|tantal|grafite/.test(a)?"areia":
+    /[aá]gua/.test(a)?"agua":/ouro|bauxit/.test(a)?"ouro":
+    /granito|calc|saibro|brita|riolito|pedra|guano/.test(a)?"pedra":null;
+  return k?`<svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${ICONS[k]}</svg>`:"";
+}
 const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 
 /* Horizontal bars: two categories, direct-labelled, 4px rounded data-end. */
@@ -354,6 +440,44 @@ function vbars(svg,items,color){
     }).join("");
 }
 
+/* Province totals for a year, straight from the same locality rows the list uses. */
+function provTotals(y){
+  const t={};
+  for(const e of DATA){const v=e.y[String(y)]; if(v!=null) t[e.p]=(t[e.p]||0)+v;}
+  return t;
+}
+
+function drawMap(){
+  const tot=provTotals(year), vals=Object.values(tot).filter(v=>v>0).sort((a,b)=>a-b);
+  const step=v=>{
+    if(!(v>0)) return "var(--m0)";
+    const i=Math.min(4,Math.floor(vals.indexOf(v)/vals.length*5));
+    return `var(--m${i+1})`;
+  };
+  $("map").innerHTML=Object.entries(MAP).map(([name,d])=>{
+    const v=tot[name]||0;
+    return `<path d="${d}" fill="${step(v)}" data-p="${esc(name)}" tabindex="0" role="button"`+
+      (prov===name?' aria-current="true"':"")+
+      `><title>${esc(name)}: ${v>0?fmt(v)+" "+T[lang].mzn_m:T[lang].map_none}</title></path>`;
+  }).join("");
+  $("plist").innerHTML=Object.entries(MAP).map(([n])=>[n,tot[n]||0])
+    .sort((a,b)=>b[1]-a[1]).map(([n,v])=>
+      `<li><span>${esc(n)}</span><b>${v>0?fmt(v):"—"}</b></li>`).join("");
+}
+$("map").addEventListener("click",e=>{
+  const pth=e.target.closest("path"); if(!pth) return;
+  prov = prov===pth.dataset.p ? null : pth.dataset.p;
+  drawMap(); search();
+});
+$("map").addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();e.target.click();}
+});
+$("years").addEventListener("click",e=>{
+  const y=e.target.dataset.y; if(!y) return;
+  year=+y; drawMap();
+  [...$("years").children].forEach(b=>b.setAttribute("aria-pressed",+b.dataset.y===year));
+});
+
 $("langs").innerHTML=Object.keys(T).map(k=>
   `<button data-l="${k}" type="button">${T[k].lang_name}</button>`).join("");
 $("langs").onclick=e=>{const l=e.target.dataset.l; if(l){lang=l; render();}};
@@ -378,6 +502,11 @@ function render(){
   $("a-list").innerHTML=t.asks.map(a=>`<li>${esc(a)}</li>`).join("");
   [...$("langs").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
 
+  $("map-t").textContent=t.map_title; $("map-s").textContent=t.map_sub;
+  $("lg-low").textContent=t.map_low; $("lg-high").textContent=t.map_high;
+  $("years").innerHTML=YEARS.map(y=>
+    `<button type="button" data-y="${y}" aria-pressed="${y===year}">${y}</button>`).join("");
+  drawMap();
   hbars($("cmp"),[{k:t.cmp_com,v:NATIONAL["2024"],c:css("--s1")},
                   {k:t.cmp_prov,v:PROVINCES,c:css("--s2")}]);
   vbars($("trend"),Object.entries(NATIONAL).map(([k,v])=>({k,v})),css("--s1"));
@@ -386,11 +515,12 @@ function render(){
 
 function search(){
   const q=$("q").value.trim().toLowerCase();
-  if(!q){$("hits").innerHTML="";$("nomatch").hidden=true;return;}
-  const hits=DATA.filter(e=>(e.l+" "+e.d+" "+e.p).toLowerCase().includes(q)).slice(0,30);
+  if(!q&&!prov){$("hits").innerHTML="";$("nomatch").hidden=true;return;}
+  const hits=DATA.filter(e=>(!prov||e.p===prov)&&
+    (!q||(e.l+" "+e.d+" "+e.p).toLowerCase().includes(q))).slice(0,60);
   $("nomatch").hidden=hits.length>0;
   $("hits").innerHTML=hits.map(e=>
-    `<li><button type="button" data-k="${esc(e.l)}|${esc(e.d)}">${esc(e.l)}`+
+    `<li><button type="button" data-k="${esc(e.l)}|${esc(e.d)}">${icon(e.m)}${esc(e.l)}`+
     `<small>${esc(e.d)}, ${esc(e.p)}</small></button></li>`).join("");
 }
 $("q").oninput=search;
@@ -406,7 +536,7 @@ function show(e){
   const t=T[lang];
   $("result").hidden=false;
   $("r-title").textContent=`${t.received}: ${e.l}`;
-  $("r-where").textContent=[e.d,e.p,e.m].filter(Boolean).join(" · ");
+  $("r-where").innerHTML=icon(e.m)+esc([e.d,e.p,e.m].filter(Boolean).join(" · "));
   const got=YEARS.filter(y=>e.y[String(y)]!=null).map(y=>({k:String(y),v:e.y[String(y)]}));
   vbars($("r-chart"),got.length?got:[{k:"—",v:0}],css("--s1"));
   $("r-total").textContent=fmt(got.reduce((a,b)=>a+b.v,0));
@@ -430,6 +560,7 @@ def main():
     data = load()
     with (ROOT / "data" / "provinces.csv").open(encoding="utf-8") as fh:
         provinces = round(sum(float(r["allocated_mzn_m"]) for r in csv.DictReader(fh)), 1)
+    map_paths, mw, mh = build_map.build()
     out = ROOT / "docs" / "index.html"
     out.parent.mkdir(exist_ok=True)
     html = HTML
@@ -440,6 +571,8 @@ def main():
         "__YEARS__": json.dumps(YEARS),
         "__NATIONAL__": json.dumps({str(y): v for y, v in NATIONAL.items()}),
         "__PROVINCES__": json.dumps(provinces),
+        "__MAP__": json.dumps(map_paths, ensure_ascii=False, separators=(",", ":")),
+        "__MAPVB__": f"0 0 {mw} {mh}",
         "__TAGLINE__": T["pt"]["tagline"],
         "__BUILT__": datetime.date.today().isoformat(),
     }.items():
