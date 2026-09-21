@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quinhão — pitch deck</title>
+<style>
+:root{--bg:#fcfcfb;--fg:#0b0b0b;--fg2:#52514e;--mut:#77746d;--line:#e3e0d9;
+ --s1:#2a78d6;--s2:#eb6834;--quote:#f4f1ea}
+*{box-sizing:border-box}
+body{margin:0;background:#4a4a48;color:var(--fg);
+ font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+.slide{width:1120px;height:630px;background:var(--bg);margin:22px auto;padding:58px 68px;
+ position:relative;display:flex;flex-direction:column;justify-content:center;
+ box-shadow:0 2px 18px rgba(0,0,0,.35);overflow:hidden}
+.n{position:absolute;right:30px;bottom:22px;font-size:12px;color:var(--mut)}
+.k{color:var(--s2);font-weight:700;font-size:13px;letter-spacing:.11em;text-transform:uppercase;margin:0 0 18px}
+h1{font-size:64px;line-height:1.05;letter-spacing:-.035em;margin:0 0 18px;font-weight:800}
+h2{font-size:38px;line-height:1.14;letter-spacing:-.025em;margin:0 0 20px;font-weight:800}
+p{font-size:21px;line-height:1.45;color:var(--fg2);margin:0 0 14px;max-width:44ch}
+p.wide{max-width:none}
+.big{font-size:84px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--s2)}
+.sub{font-size:16px;color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.card h3{margin:0 0 8px;font-size:17px}
+.card p{font-size:15px;margin:0}
+blockquote{margin:0;padding:22px 26px;background:var(--quote);border-left:5px solid var(--s2);border-radius:0 8px 8px 0}
+blockquote p{font-size:23px;font-style:italic;color:var(--fg);margin:0;max-width:none}
+blockquote cite{display:block;margin-top:14px;font-size:14px;color:var(--mut);font-style:normal}
+ul{margin:0;padding-left:22px}
+li{font-size:19px;color:var(--fg2);margin:9px 0}
+table{width:100%;border-collapse:collapse;font-size:17px}
+th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}
+td.n2{text-align:right;font-weight:700}
+.bar{height:34px;border-radius:5px}
+.lbl{font-size:15px;color:var(--fg2);margin-bottom:5px}
+.val{font-size:20px;font-weight:700;margin-left:12px}
+.row{display:flex;align-items:center;margin-bottom:18px}
+.foot{position:absolute;left:68px;bottom:22px;font-size:13px;color:var(--mut)}
+@media print{
+  body{background:#fff}
+  .slide{margin:0;box-shadow:none;page-break-after:always;break-after:page;
+   width:100%;height:100vh;padding:5vh 6vw}
+  @page{size:1120px 630px;margin:0}
+}
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <p class="k">Transparency &amp; Accountability</p>
+  <h1>Quinhão</h1>
+  <p style="font-size:26px;color:var(--fg)">The share that is owed to someone by right.</p>
+  <p>Mozambican law sends <b>2.75%</b> of the mining and petroleum production tax to the
+  communities that host the extraction. This shows where it went — and what nobody can explain.</p>
+  <p class="foot">eltonlaice.github.io/quinhao</p>
+  <div class="n">1</div>
+</section>
+
+<section class="slide">
+  <p class="k">The problem</p>
+  <h2>The money arrives. The explanation does not.</h2>
+  <blockquote>
+    <p>“the budget execution report does not allow us to determine what criterion was used
+    to split the amount allocated to each community, nor what activities the funds went to”</p>
+    <cite>EITI Mozambique — the official transparency body — in its 2020 and 2021 reports</cite>
+  </blockquote>
+  <p style="margin-top:20px">This is not an accusation from outside. It is the state's own
+  transparency mechanism reporting that it cannot answer the question.</p>
+  <div class="n">2</div>
+</section>
+
+<section class="slide">
+  <p class="k">The finding · 2024</p>
+  <h2>Communities get a third of what the provincial offices get.</h2>
+  <div class="row"><div style="flex:1">
+    <div class="lbl">Affected communities</div>
+    <div class="bar" style="width:38%;background:var(--s1)"></div>
+  </div><div class="val">318.7M MZN</div></div>
+  <div class="row"><div style="flex:1">
+    <div class="lbl">Provincial directorates</div>
+    <div class="bar" style="width:100%;background:var(--s2)"></div>
+  </div><div class="val">840.3M MZN</div></div>
+  <p style="margin-top:18px">The people living on top of the ruby, the coal and the gas
+  receive 4.99 million dollars. The provincial capitals receive 13.15 million.</p>
+  <p class="foot">EITI Mozambique 2023–2024 report, Annexes 6.1 and 6.2</p>
+  <div class="n">3</div>
+</section>
+
+<section class="slide">
+  <p class="k">And the arithmetic does not close</p>
+  <h2>12.79 million meticais unaccounted for — admitted in the report itself.</h2>
+  <table>
+    <tr><td>Mining production tax, 2018</td><td class="n2">3,029.90</td></tr>
+    <tr><td>Petroleum production tax, 2018</td><td class="n2">627.80</td></tr>
+    <tr><td><b>Total</b></td><td class="n2">3,657.70</td></tr>
+    <tr><td>2.75% of that should be</td><td class="n2">100.59</td></tr>
+    <tr><td>Actually allocated</td><td class="n2">87.80</td></tr>
+    <tr style="color:var(--s2)"><td><b>Difference</b></td><td class="n2">12.79</td></tr>
+  </table>
+  <p style="margin-top:16px">The Ministry's explanation: only the <i>mining</i> tax counts,
+  not the petroleum one. The law says both.</p>
+  <p class="foot">Millions of MZN · EITI Mozambique 2020 report, Table 43</p>
+  <div class="n">4</div>
+</section>
+
+<section class="slide">
+  <p class="k">Who this is for</p>
+  <h2>56 localities. The people who live in them.</h2>
+  <div class="three">
+    <div class="card"><h3>Residents</h3><p>Nyamanhumbir, Benga, Topuito, Pande and 52 more.
+    They can see what was booked in their name, and who is answerable for it.</p></div>
+    <div class="card"><h3>Local councils</h3><p>Locality Consultative Councils approve the
+    projects. They rarely have the allocation figures in front of them.</p></div>
+    <div class="card"><h3>Journalists &amp; civil society</h3><p>CIP and others analyse the
+    2.75% today by reading PDFs. This makes six years queryable.</p></div>
+  </div>
+  <p style="margin-top:26px">The design assumes a basic phone on a weak connection, varied
+  literacy, and Portuguese — not a laptop in Maputo.</p>
+  <div class="n">5</div>
+</section>
+
+<section class="slide">
+  <p class="k">The solution</p>
+  <h2>One page. Three questions answered.</h2>
+  <ul>
+    <li><b>How much came to my locality?</b> Six years, by year, with the commodity named.</li>
+    <li><b>How does that compare?</b> Province and district maps, filterable by year — 86.7
+    of Tete's 98.0 million lands in one district, Moatize.</li>
+    <li><b>What do I do now?</b> The District Secretariat and the Consultative Council are
+    answerable; the law limits spending to education, health, agriculture and forestry; and
+    three specific questions a resident has the right to ask.</li>
+  </ul>
+  <p style="margin-top:22px">English, Portuguese and French. Meticais or dollars.
+  <b>80 KB, no external requests, works offline once opened.</b></p>
+  <div class="n">6</div>
+</section>
+
+<section class="slide">
+  <p class="k">Why the numbers can be trusted</p>
+  <h2>The build fails rather than publish a wrong figure.</h2>
+  <div class="two">
+    <div>
+      <ul>
+        <li>Nothing typed by hand — five source PDFs parsed by script</li>
+        <li>Every year's total asserted against the published total</li>
+        <li>An unmatched district name fails the build instead of vanishing from the map</li>
+        <li>Manual corrections listed explicitly, with reasons</li>
+        <li>Currency converted at each year's own official rate</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What the data cannot show</h3>
+      <p>Execution is reported at ~100%. That means the money left the treasury — not that
+      anything was built. The page says so, in the same type size as the good news.</p>
+    </div>
+  </div>
+  <p class="foot">Sources: EITI Mozambique · geoBoundaries · World Bank PA.NUS.FCRF</p>
+  <div class="n">7</div>
+</section>
+
+<section class="slide">
+  <p class="k">How AI coding tools were used</p>
+  <h2>The most useful thing it did was kill the first idea.</h2>
+  <ul>
+    <li><b>Tested the premise.</b> The original concept was "allocated vs. actually
+    transferred". The annexes show 100% execution everywhere — that story did not exist.</li>
+    <li><b>PDF archaeology.</b> Found the transfer tables across five reports in three
+    different layouts, including project-level spending nobody had extracted.</li>
+    <li><b>Parsers written against a hard check</b>, corrected until all five totals matched.</li>
+    <li><b>Verified rather than assumed.</b> Checked data availability before committing —
+    the national procurement portal was returning a database error, which is why this uses
+    EITI data. Rejected an offered photograph showing a rig type Mozambique does not have.</li>
+  </ul>
+  <div class="n">8</div>
+</section>
+
+<section class="slide">
+  <p class="k">Scale</p>
+  <h2>The format is the same in 50+ countries.</h2>
+  <p class="wide">EITI reporting is standardised. The parsing approach, the verification
+  gate and the page all port to any implementing country that publishes subnational
+  transfers — Ghana, Nigeria, Tanzania, the DRC.</p>
+  <p class="wide">Inside Mozambique the next layer is field verification: the page already
+  ends by telling a resident who is answerable and what to ask. Collecting their answers
+  turns 56 localities into a monitoring network.</p>
+  <p class="wide" style="color:var(--fg);margin-top:26px"><b>Cost to run: zero.</b> A static
+  page and a script that re-runs when the next EITI report is published.</p>
+  <div class="n">9</div>
+</section>
+
+<section class="slide">
+  <p class="k">Quinhão</p>
+  <h1 style="font-size:46px">Nobody in Nyamanhumbir was told<br>that 21.1 million meticais
+  was booked in their name.</h1>
+  <p style="font-size:24px;color:var(--fg)">Now they can check — and know who to ask.</p>
+  <p class="foot">eltonlaice.github.io/quinhao · github.com/eltonlaice/quinhao</p>
+  <div class="n">10</div>
+</section>
+
+</body>
+</html>
