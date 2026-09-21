@@ -62,6 +62,28 @@ cache e regenera os dois CSV. Termina com uma auto-verificação que confirma qu
 calculado de cada ano é igual ao total publicado — **se um parser se desviar, a execução
 falha em voz alta** em vez de escrever números errados.
 
+## Como foi construído
+
+Todo este repositório foi escrito com **Claude Code**. A parte assistida por IA é a
+construção; a página em si não corre nenhum modelo nem faz pedidos de rede.
+
+O mais útil que fez foi matar a ideia original. O primeiro conceito era "dotado versus
+efectivamente transferido" — a leitura dos anexos mostrou execução a 100% em todo o lado,
+portanto essa história não existia. A constatação que a substituiu saiu dos documentos,
+não de um prompt.
+
+- Localizou as tabelas de transferências em cinco relatórios com três formatos diferentes,
+  incluindo os gastos ao nível de projecto do relatório de 2022
+- Escreveu um parser por ano e corrigiu-os contra os totais publicados até os cinco
+  baterem; vários erros só apareceram porque uma asserção falhou
+- Apanhou `Alto Moloucue` contra `Alto Molocue` e Pemba arquivado como `Cidade De Pemba`,
+  porque um nome de distrito sem correspondência faz o build falhar em vez de desaparecer
+  do mapa
+- Verificou a disponibilidade dos dados antes de decidir: o portal nacional de concursos
+  estava a devolver erro de base de dados, e por isso este projecto usa dados do ITIE
+- Validou a paleta dos gráficos para daltonismo em vez de escolher a olho, e testou a
+  página a 375px nos três idiomas
+
 ## Ressalvas sobre os dados
 
 Lê isto antes de usar os dados. É o essencial, não o rodapé.

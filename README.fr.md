@@ -65,6 +65,27 @@ cache et régénère les deux CSV. Il se termine par une auto-vérification qui 
 le total calculé de chaque année correspond au total publié — **si un analyseur dérive,
 l'exécution échoue bruyamment** au lieu d'écrire de mauvais chiffres.
 
+## Comment cela a été construit
+
+Tout ce dépôt a été écrit avec **Claude Code**. La partie assistée par IA est la
+construction ; la page elle-même n'exécute aucun modèle et ne fait aucune requête réseau.
+
+Le plus utile qu'elle ait fait a été de tuer l'idée initiale. Le premier concept était
+« doté contre réellement transféré » — les annexes montrent une exécution à 100 % partout,
+donc cette histoire n'existait pas. Le constat qui l'a remplacée vient des documents, pas
+d'un prompt.
+
+- Localisé les tableaux de transferts dans cinq rapports aux trois mises en page
+  différentes, dont les dépenses par projet du rapport 2022
+- Écrit un analyseur par année, corrigé contre les totaux publiés jusqu'à ce que les cinq
+  correspondent ; plusieurs bogues ne sont apparus que parce qu'une assertion a échoué
+- Détecté `Alto Moloucue` contre `Alto Molocue` et Pemba classé « Cidade De Pemba », car
+  un nom de district sans correspondance fait échouer le build au lieu de disparaître
+- Vérifié la disponibilité des données avant de s'engager : le portail national des marchés
+  publics renvoyait une erreur de base de données, d'où l'usage des données ITIE
+- Validé la palette pour le daltonisme plutôt que de choisir à l'œil, et testé la page à
+  375 px dans les trois langues
+
 ## Réserves sur les données
 
 À lire avant d'utiliser les données. C'est l'essentiel, pas les petits caractères.

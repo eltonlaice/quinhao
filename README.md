@@ -64,6 +64,27 @@ and regenerates both CSVs. It ends with a self-check that asserts each year's pa
 total equals the published total — **if a parser drifts, the run fails loudly** rather
 than writing wrong numbers.
 
+## How this was built
+
+Every line of this repository was written with **Claude Code**. The build is the
+AI-assisted part; the page itself runs no model and makes no network calls.
+
+The most useful thing it did was kill the original idea. The first concept was
+"allocated versus actually transferred" — reading the source annexes showed execution
+reported at 100% across the board, so that story did not exist. The finding that replaced
+it came out of the documents, not out of a prompt.
+
+- Located the community-transfer tables across five reports in three different layouts,
+  including the project-level spending in the 2022 report
+- Wrote one parser per year and corrected them against the published totals until all
+  five matched; several bugs surfaced only because an assertion failed
+- Caught `Alto Moloucue` vs `Alto Molocue` and Pemba filed as `Cidade De Pemba`, because
+  an unmatched district name fails the build rather than vanishing from the map
+- Checked data availability before committing: the national procurement portal was
+  returning a database error, which is why this project uses EITI data
+- Validated the chart palette for colour-vision deficiency instead of picking by eye, and
+  drove the live page at phone width in all three languages
+
 ## Data caveats
 
 Read these before using the data. They are the point, not the fine print.
