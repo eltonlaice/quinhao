@@ -95,10 +95,7 @@ l'exécution échoue bruyamment** au lieu d'écrire de mauvais chiffres.
 - Tableaux 42, 45 et 46 des rapports 2020, 2022 et 2021
 - [Centro de Integridade Pública](https://www.cipmoz.org/) — analyse indépendante des 2,75 %
 
-## Contexte
-
-Réalisé pour le hackathon Open Society Foundations × Andela, *Information You Can Trust*,
-volet **Transparence et redevabilité**.
+## Langues
 
 Le code et les identifiants sont en anglais. Le contenu destiné aux utilisateurs est en
 anglais, portugais et français. Le portugais est la langue des documents sources et de

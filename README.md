@@ -92,10 +92,7 @@ Read these before using the data. They are the point, not the fine print.
 - Tables 42, 45 and 46 of the 2020, 2022 and 2021 reports
 - [Centro de Integridade Pública](https://www.cipmoz.org/) — independent analysis of the 2.75%
 
-## Context
-
-Built for the Open Society Foundations × Andela hackathon, *Information You Can Trust*,
-**Transparency & Accountability** track.
+## Languages
 
 Code and identifiers are in English. User-facing content is in English, Portuguese and
 French. Portuguese is the language of the source documents and of the Mozambican state;

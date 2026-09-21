@@ -90,10 +90,7 @@ Lê isto antes de usar os dados. É o essencial, não o rodapé.
 - Tabelas 42, 45 e 46 dos relatórios de 2020, 2022 e 2021
 - [Centro de Integridade Pública](https://www.cipmoz.org/) — análise independente dos 2,75%
 
-## Contexto
-
-Construído para o hackathon Open Society Foundations × Andela, *Information You Can
-Trust*, track de **Transparência e Responsabilização**.
+## Línguas
 
 O código e os identificadores estão em inglês. O conteúdo para o utilizador está em
 inglês, português e francês. O português é a língua dos documentos de origem e do Estado
